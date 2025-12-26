@@ -4,227 +4,139 @@ Production-ready Next.js starter with TypeScript, Tailwind CSS v4, and comprehen
 
 ## Tech Stack
 
-- **Framework**: Next.js 16 (App Router) + React 19
-- **Language**: TypeScript 5 (strict mode + additional checks)
-- **Styling**: Tailwind CSS v4 (CSS-based config)
-- **Runtime**: Node.js >=22.14.0 (npm/yarn/pnpm/bun supported)
-- **Linting**: ESLint 9 (flat config) + Prettier 3.7
-- **Git Hooks**: Husky 9 + lint-staged + commitlint
+- **[Next.js 16](https://nextjs.org/docs)** (App Router) + [React 19](https://react.dev)
+- **[TypeScript 5](https://www.typescriptlang.org/docs)** (strict mode)
+- **[Tailwind CSS v4](https://tailwindcss.com/docs)**
+- **[Bun](https://bun.sh/docs)** (preferred) or Node.js >=22.14.0
+- **[ESLint 9](https://eslint.org/docs/latest)** + [Prettier](https://prettier.io/docs)
+- **[Vitest](https://vitest.dev)** + [Testing Library](https://testing-library.com/react)
 
 ## Quick Start
 
 ```bash
-# Install dependencies (use your preferred package manager)
-npm install
-# or: yarn install / pnpm install / bun install
-
-# Set up environment variables
-cp .env.example .env.local
+# Install dependencies
+bun install  # or: npm install / yarn install
 
 # Start development server
-npm run dev
+bun dev      # or: npm run dev / yarn dev
 ```
 
 Open http://localhost:3000
 
-## Available Scripts
+## Scripts
 
-### Development
-
-```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run start        # Start production server
-npm run analyze      # Analyze bundle size (opens browser)
-```
-
-### Code Quality
-
-```bash
-npm run lint              # Run TypeScript + ESLint
-npm run lint:fix          # Auto-fix ESLint errors
-npm run type-check        # TypeScript type checking only
-npm run prettier          # Format all files
-npm run prettier:check    # Check formatting without fixing
-npm run validate          # Run all checks (recommended before committing)
-```
-
-### Maintenance
-
-```bash
-npm run reset             # Remove .next and node_modules
-npm run clean:macos       # Remove macOS files (._* and .DS_Store)
-npm run git-clean         # Git clean build artifacts
-```
+| Command             | Description                    |
+| ------------------- | ------------------------------ |
+| `bun dev`           | Start development server       |
+| `bun build`         | Build for production           |
+| `bun start`         | Start production server        |
+| `bun lint`          | Run TypeScript + ESLint        |
+| `bun lint:fix`      | Auto-fix ESLint errors         |
+| `bun type-check`    | TypeScript type checking       |
+| `bun prettier`      | Format all files               |
+| `bun validate`      | Run all checks (before commit) |
+| `bun test`          | Run tests (watch mode)         |
+| `bun test:ui`       | Run tests with Vitest UI       |
+| `bun test:coverage` | Generate coverage report       |
+| `bun analyze`       | Analyze bundle size            |
 
 ## Project Structure
 
 ```
-├── src/
-│   └── app/                  # Next.js App Router
-│       ├── globals.css       # Global styles + Tailwind config
-│       ├── layout.tsx        # Root layout
-│       └── page.tsx          # Home page
-├── .husky/                   # Git hooks (pre-commit, commit-msg)
-├── .vscode/                  # VSCode settings + recommended extensions
-├── .editorconfig             # Editor consistency configuration
-├── .env.example              # Environment variables template
-├── .gitignore                # Git ignore patterns
-├── .nvmrc                    # Node.js version (22.14.0)
-├── .prettierignore           # Prettier ignore patterns
-├── commitlint.config.mjs     # Commit message rules
-├── eslint.config.mjs        # ESLint configuration
-├── lint-staged.config.mjs    # Staged files linting
-├── next.config.ts            # Next.js configuration
-├── postcss.config.mjs        # PostCSS configuration
-├── prettier.config.mjs       # Code formatting rules
-└── tsconfig.json             # TypeScript configuration
+src/
+├── app/              # Next.js App Router
+│   └── [locale]/     # Internationalized routes
+├── shared/           # Shared layer (FSD)
+│   ├── ui/           # Components
+│   ├── constants/    # Constants
+│   ├── lib/          # Utilities
+│   ├── types/        # TypeScript types
+│   └── config/       # Configuration
+└── features/         # Feature modules (FSD)
 ```
+
+## Path Aliases
+
+Configured in `tsconfig.json`:
+
+- `@/*` → `./src/*`
+- `@shared/*` → `./src/shared/*`
+- `@features/*` → `./src/features/*`
+- `@assets/*` → `./src/shared/assets/*`
+- `@config/*` → `./src/shared/config/*`
+- `@constants/*` → `./src/shared/constants/*`
+- `@components/*` → `./src/shared/ui/*`
+- `@ui/*` → `./src/shared/ui/*`
+- `@lib/*` → `./src/shared/lib/*`
+- `@providers/*` → `./src/shared/providers/*`
+- `@types/*` → `./src/shared/types/*`
+- `@utils/*` → `./src/shared/lib/utils/*`
 
 ## Configuration
 
-### TypeScript
-
-Strict mode with additional safety checks:
-
-- `noUncheckedIndexedAccess` - Safer array/object access
-- `noImplicitOverride` - Explicit override keyword required
-- `noFallthroughCasesInSwitch` - Prevent missing breaks
-- `noUnusedLocals` - Flag unused variables
-- `noUnusedParameters` - Flag unused function parameters
-
-**Path Aliases** (configured in `tsconfig.json`):
-
-- `@/*` → `./src/*`
-- `@constants/*` → `./src/constants/*`
-- `@components/*` → `./src/components/*`
-- `@features/*` → `./src/features/*`
-- `@lib/*` → `./src/lib/*`
-- `@providers/*` → `./src/providers/*`
-- `@types/*` → `./src/types/*`
-- `@utils/*` → `./src/utils/*`
-
 ### ESLint
 
-- Next.js recommended rules (core-web-vitals + TypeScript)
+- Next.js recommended rules
 - Automatic unused imports removal
 - Prettier integration
-- Custom code quality rules (no-console, no-var, etc.)
+- Custom quality rules
 
 ### Prettier
 
-- Automatic import sorting (`@trivago/prettier-plugin-sort-imports`)
-- Tailwind class sorting (`prettier-plugin-tailwindcss`)
-- Tabs for indentation, single quotes, no semicolons
+- Import sorting ([@trivago/prettier-plugin-sort-imports](https://github.com/trivago/prettier-plugin-sort-imports))
+- Tailwind class sorting ([prettier-plugin-tailwindcss](https://github.com/tailwindlabs/prettier-plugin-tailwindcss))
+- Tabs, single quotes, no semicolons
 
 ### Git Hooks
 
-- **pre-commit**: Runs lint-staged (formats + lints staged files only)
-- **commit-msg**: Validates commit messages against conventional commits
+- **pre-commit**: Lint-staged (formats + lints staged files)
+- **commit-msg**: [Conventional Commits](https://www.conventionalcommits.org/) validation
 
-## Commit Message Format
+**Commit format**: `type(scope?): subject`  
+**Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`, `ci`, `build`, `revert`, `security`
 
-This project enforces [Conventional Commits](https://www.conventionalcommits.org/):
+## Testing
 
-```
-type(scope?): subject
-```
+Uses [Vitest](https://vitest.dev) with [React Testing Library](https://testing-library.com/react).
 
-**Valid types**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`, `ci`, `build`, `revert`,
-`security`
+```typescript
+// Example test
+import { render, screen } from '@testing-library/react'
+import { expect, test } from 'vitest'
 
-**Examples**:
-
-```bash
-git commit -m "feat: add user authentication"
-git commit -m "fix: resolve navigation bug"
-git commit -m "docs: update setup instructions"
-git commit -m "refactor(auth): simplify token validation"
+test('renders component', () => {
+  render(<Component />)
+  expect(screen.getByRole('button')).toBeInTheDocument()
+})
 ```
 
-## VSCode Setup
-
-Install recommended extensions (auto-suggested when opening the project):
-
-- **Prettier** - Code formatting
-- **ESLint** - Linting
-- **Tailwind CSS IntelliSense** - Tailwind autocomplete
-- **EditorConfig** - Consistent coding styles
-- **Error Lens** - Inline error highlighting
-- **Pretty TypeScript Errors** - Better TS error messages
-- **Bun for VSCode** - Bun support
-
-Workspace configured for:
-
-- Auto-format on save (Prettier)
-- Auto-fix ESLint issues on save
-- Tailwind CSS autocomplete
-
-## Environment Variables
-
-Copy `.env.example` to `.env.local`:
-
-```bash
-cp .env.example .env.local
-```
-
-Add your environment variables to `.env.local` (gitignored by default).
-
-## Tailwind CSS v4
-
-This project uses Tailwind CSS v4 which has a different configuration approach:
-
-- No `tailwind.config.js` file
-- Configuration done via CSS in `src/app/globals.css`
-- Uses `@theme` directive for customization
-- Faster build times and smaller bundle
-
-Example customization in `globals.css`:
-
-```css
-@theme inline {
-	--color-primary: #3b82f6;
-	--font-sans: 'Inter', sans-serif;
-}
-```
+**Note**: Vitest doesn't support async Server Components. Use E2E tests for those.
 
 ## Bundle Analysis
 
-Analyze your application's bundle size to identify optimization opportunities:
-
 ```bash
-npm run analyze
+bun analyze
 ```
 
-This will:
+Opens interactive bundle visualizations powered by
+[@next/bundle-analyzer](https://github.com/vercel/next.js/tree/canary/packages/next-bundle-analyzer).
 
-1. Build your application for production
-2. Generate interactive visualizations of your bundle
-3. Automatically open two HTML reports in your browser:
-   - Client bundle analysis
-   - Server bundle analysis
+## Docker
 
-**What to look for:**
+```bash
+docker-compose up
+```
 
-- Large dependencies that could be replaced with lighter alternatives
-- Code that could be lazy-loaded or code-split
-- Duplicate dependencies in different parts of your bundle
-- Unexpected imports bloating your bundle size
+Uses npm in Docker (included with Node.js). For local development, Bun is preferred.
 
-The analyzer is powered by `@next/bundle-analyzer` and only runs when explicitly invoked (won't affect normal builds).
+## Resources
 
-## Additional Notes
-
-- **Node.js version**: Use Node.js 22.14.0 (specified in `.nvmrc`). Use `nvm use` to switch versions automatically.
-- **Package manager**: Supports npm, yarn, pnpm, or bun. No lock-in to a specific manager.
-- **Image optimization**: `ignoreScripts` and `trustedDependencies` are configured for `sharp` and `unrs-resolver`
-  (Next.js dependencies)
-- **Pre-commit optimized**: Only staged files are checked (full validation via `npm run validate`)
-- **PostCSS**: Configured with `@tailwindcss/postcss` for Tailwind CSS v4 processing
-
-## Learn More
-
-- [Next.js Documentation](https://nextjs.org/docs)
+- [Next.js Docs](https://nextjs.org/docs)
+- [React Docs](https://react.dev)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs)
 - [Tailwind CSS v4](https://tailwindcss.com/docs)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-- [Bun Documentation](https://bun.sh/docs)
+- [Bun Docs](https://bun.sh/docs)
+- [Vitest Docs](https://vitest.dev/guide)
+- [Testing Library](https://testing-library.com/react)
+- [ESLint Docs](https://eslint.org/docs/latest)
+- [Prettier Docs](https://prettier.io/docs)

@@ -1,0 +1,51 @@
+{
+	"METADATA": {
+		"TITLE": "Next.js Starter",
+		"DESCRIPTION": "A modern Next.js starter template with internationalization support"
+	},
+	"ERROR": {
+		"TITLE": "Something went wrong",
+		"DESCRIPTION": "An unexpected error occurred. Please try again or contact support if the problem persists.",
+		"ERROR_ID": "Error ID",
+		"TRY_AGAIN": "Try again",
+		"GO_HOME": "Go home",
+		"COPY": "Copy",
+		"COPIED": "Copied"
+	},
+	"LOADING": {
+		"MESSAGE": "Loading..."
+	},
+	"GLOBAL_ERROR": {
+		"TITLE": "Application Error",
+		"DESCRIPTION": "A critical error occurred in the application. Please refresh the page or contact support.",
+		"ERROR_ID": "Error ID",
+		"TRY_AGAIN": "Try again",
+		"GO_HOME": "Go home",
+		"COPY": "Copy",
+		"COPIED": "Copied"
+	},
+	"NOT_FOUND": {
+		"TITLE": "404",
+		"HEADING": "Page Not Found",
+		"DESCRIPTION": "The page you are looking for does not exist or has been moved.",
+		"GO_HOME": "Go home",
+		"GO_BACK": "Go back"
+	},
+	"HOME": {
+		"TITLE": "Welcome to Next.js Starter",
+		"DESCRIPTION": "A production-ready starter template with TypeScript, Tailwind CSS, and comprehensive tooling.",
+		"FEATURES_TITLE": "Key Features",
+		"FEATURE_1": "Next.js 16 with App Router and React Server Components",
+		"FEATURE_2": "TypeScript with strict mode and additional safety checks",
+		"FEATURE_3": "Tailwind CSS v4 with dark mode support",
+		"FEATURE_4": "Internationalization with next-intl",
+		"LEARN_MORE": "Learn More"
+	},
+	"ABOUT": {
+		"TITLE": "About",
+		"SUBTITLE": "Learn more about this starter template",
+		"BACK": "Back to Home",
+		"SECTION_TITLE": "Additional Information",
+		"SECTION_TITLE_2": "More Details"
+	}
+}
