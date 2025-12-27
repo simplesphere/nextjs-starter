@@ -1,0 +1,5 @@
+export { ForgotPasswordForm } from '@/features/auth/forgot-password/ui/forgot-password-form'
+export type { ForgotPasswordFormData } from '@/features/auth/forgot-password/model/schema'
+export { forgotPasswordSchema } from '@/features/auth/forgot-password/model/schema'
+export { forgotPasswordAction } from '@/features/auth/forgot-password/api/actions'
+export type { ForgotPasswordResult } from '@/features/auth/forgot-password/model/types'

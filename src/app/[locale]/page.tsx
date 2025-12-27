@@ -11,8 +11,8 @@ export default async function Home() {
 	const t = await getTranslations('HOME')
 
 	return (
-		<div className="min-h-screen bg-zinc-50 dark:bg-black">
-			<main className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+		<div className="bg-zinc-50 dark:bg-black">
+			<div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
 				<div className="text-center">
 					<h1 className="text-4xl font-bold tracking-tight text-zinc-900 sm:text-6xl dark:text-zinc-50">
 						{t('TITLE')}
@@ -58,7 +58,7 @@ export default async function Home() {
 						<Stopwatch />
 					</div>
 				</div>
-			</main>
+			</div>
 		</div>
 	)
 }

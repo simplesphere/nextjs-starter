@@ -11,8 +11,8 @@ export default async function About() {
 	const t = await getTranslations('ABOUT')
 
 	return (
-		<div className="min-h-screen bg-zinc-50 dark:bg-black">
-			<main className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+		<div className="bg-zinc-50 dark:bg-black">
+			<div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
 				<Link
 					href="/"
 					className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
@@ -79,7 +79,7 @@ export default async function About() {
 						</section>
 					</div>
 				</article>
-			</main>
+			</div>
 		</div>
 	)
 }

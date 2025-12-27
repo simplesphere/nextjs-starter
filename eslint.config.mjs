@@ -16,7 +16,7 @@ const eslintConfig = [
 			'.husky',
 			'.vscode',
 			'public/**',
-			'src/shared/ui/**',
+			'src/shared/ui/shadcn/**',
 			'**/*._*',
 			'**/.DS_Store'
 		]

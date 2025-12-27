@@ -1,0 +1,5 @@
+export { VerifyOtpForm } from '@/features/auth/verify-otp/ui/verify-otp-form'
+export type { VerifyOtpFormData } from '@/features/auth/verify-otp/model/schema'
+export { verifyOtpSchema } from '@/features/auth/verify-otp/model/schema'
+export { verifyOtpAction } from '@/features/auth/verify-otp/api/actions'
+export type { VerifyOtpResult } from '@/features/auth/verify-otp/model/types'

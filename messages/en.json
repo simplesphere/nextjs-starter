@@ -47,5 +47,129 @@
 		"BACK": "Back to Home",
 		"SECTION_TITLE": "Additional Information",
 		"SECTION_TITLE_2": "More Details"
+	},
+	"AUTH": {
+		"LOGIN": {
+			"TITLE": "Sign in",
+			"DESCRIPTION": "Enter your credentials to access your account",
+			"EMAIL_LABEL": "Email",
+			"EMAIL_PLACEHOLDER": "name@example.com",
+			"PASSWORD_LABEL": "Password",
+			"PASSWORD_PLACEHOLDER": "Enter your password",
+			"FORGOT_PASSWORD": "Forgot password?",
+			"SUBMIT": "Sign in",
+			"SUBMIT_LOADING": "Signing in...",
+			"BACK": "Back to Home",
+			"ERRORS": {
+				"EMAIL_REQUIRED": "Email is required",
+				"EMAIL_INVALID": "Please enter a valid email address",
+				"PASSWORD_REQUIRED": "Password is required",
+				"PASSWORD_MIN_LENGTH": "Password must be at least 6 characters",
+				"GENERAL": "An error occurred. Please try again."
+			}
+		},
+		"FORGOT_PASSWORD": {
+			"TITLE": "Forgot password",
+			"DESCRIPTION": "Enter your email address and we'll send you a verification code",
+			"EMAIL_LABEL": "Email",
+			"EMAIL_PLACEHOLDER": "name@example.com",
+			"SUBMIT": "Send verification code",
+			"SUBMIT_LOADING": "Sending...",
+			"BACK": "Back to Login",
+			"ERRORS": {
+				"EMAIL_REQUIRED": "Email is required",
+				"EMAIL_INVALID": "Please enter a valid email address",
+				"GENERAL": "An error occurred. Please try again."
+			}
+		},
+		"VERIFY_OTP": {
+			"TITLE": "Verify code",
+			"DESCRIPTION": "Enter the 6-digit verification code sent to your email",
+			"OTP_LABEL": "Verification code",
+			"HELP_TEXT": "Check your email for the verification code",
+			"SUBMIT": "Verify",
+			"SUBMIT_LOADING": "Verifying...",
+			"BACK": "Back",
+			"ERRORS": {
+				"OTP_REQUIRED": "Verification code is required",
+				"GENERAL": "An error occurred. Please try again."
+			}
+		},
+		"RESET_PASSWORD": {
+			"TITLE": "Reset password",
+			"DESCRIPTION": "Set a new password for your account",
+			"PASSWORD_LABEL": "New password",
+			"PASSWORD_PLACEHOLDER": "Enter your new password",
+			"CONFIRM_PASSWORD_LABEL": "Confirm password",
+			"CONFIRM_PASSWORD_PLACEHOLDER": "Confirm your new password",
+			"SUBMIT": "Reset password",
+			"SUBMIT_LOADING": "Resetting...",
+			"BACK": "Back to Login",
+			"ERRORS": {
+				"PASSWORD_REQUIRED": "Password is required",
+				"PASSWORD_MIN_LENGTH": "Password must be at least 6 characters",
+				"CONFIRM_PASSWORD_REQUIRED": "Please confirm your password",
+				"PASSWORD_MISMATCH": "Passwords do not match",
+				"GENERAL": "An error occurred. Please try again."
+			}
+		}
+	},
+	"NAVIGATION": {
+		"PAGES": "Pages",
+		"HOME": "Home",
+		"ABOUT": "About",
+		"PRIVACY": "Privacy Policy",
+		"TERMS": "Terms of Service"
+	},
+	"FOOTER": {
+		"COPYRIGHT": "© {year} Next.js Starter. All rights reserved.",
+		"PRIVACY_POLICY": "Privacy Policy",
+		"TERMS_OF_SERVICE": "Terms of Service"
+	},
+	"THEME_TOGGLE": {
+		"ARIA_LABEL": "Toggle theme"
+	},
+	"OTP_INPUT": {
+		"DIGIT_ARIA_LABEL": "OTP digit {digit}"
+	},
+	"PRIVACY": {
+		"TITLE": "Privacy Policy",
+		"INTRO": "This Privacy Policy explains how we collect, use, and protect your information when you use our services.",
+		"BACK": "Back to Home",
+		"SECTION_1_TITLE": "Information We Collect",
+		"SECTION_1_CONTENT": "We may collect information you provide directly to us, such as your name, email address, or other contact details. We may also collect basic technical data automatically, including IP address, browser type, device information, and usage activity.",
+		"SECTION_2_TITLE": "How We Use Information",
+		"SECTION_2_CONTENT": "We use your information to operate and improve our services, communicate with you, respond to inquiries, and maintain security. We do not sell your personal information.",
+		"SECTION_3_TITLE": "Sharing of Information",
+		"SECTION_3_CONTENT": "We may share information with trusted service providers who help us operate our services. We may also disclose information if required by law or to protect our rights and users.",
+		"SECTION_4_TITLE": "Data Security",
+		"SECTION_4_CONTENT": "We take reasonable measures to protect your information, but no system is completely secure. Use of the service is at your own risk.",
+		"SECTION_5_TITLE": "Your Choices",
+		"SECTION_5_CONTENT": "You may request access to, correction of, or deletion of your personal information where applicable by law.",
+		"SECTION_6_TITLE": "Changes to This Policy",
+		"SECTION_6_CONTENT": "We may update this Privacy Policy from time to time. Continued use of the service means you accept the updated policy.",
+		"SECTION_7_TITLE": "Contact",
+		"SECTION_7_CONTENT": "If you have questions about this Privacy Policy, contact us through our official support channels."
+	},
+	"TERMS": {
+		"TITLE": "Terms of Service",
+		"INTRO": "These Terms of Service govern your use of our services. By accessing or using the service, you agree to these terms.",
+		"BACK": "Back to Home",
+		"SECTION_1_TITLE": "Use of the Service",
+		"SECTION_1_CONTENT": "You agree to use the service only for lawful purposes and in accordance with these terms. You may not misuse, disrupt, or attempt to gain unauthorized access to the service.",
+		"SECTION_2_TITLE": "Accounts",
+		"SECTION_2_CONTENT": "If you create an account, you are responsible for maintaining its security and for all activity under your account.",
+		"SECTION_3_TITLE": "Intellectual Property",
+		"SECTION_3_CONTENT": "All content, software, and materials provided through the service are owned by us or our licensors. You may not copy, modify, or distribute them without permission.",
+		"SECTION_4_TITLE": "Disclaimer",
+		"SECTION_4_CONTENT": "The service is provided on an as is and as available basis. We make no warranties of any kind, express or implied.",
+		"SECTION_5_TITLE": "Limitation of Liability",
+		"SECTION_5_CONTENT": "To the maximum extent permitted by law, we are not liable for any indirect, incidental, or consequential damages arising from your use of the service.",
+		"SECTION_6_TITLE": "Termination",
+		"SECTION_6_CONTENT": "We may suspend or terminate access to the service at any time if you violate these terms.",
+		"SECTION_7_TITLE": "Changes to the Terms",
+		"SECTION_7_CONTENT": "We may update these Terms of Service from time to time. Continued use of the service means you accept the updated terms.",
+		"SECTION_8_TITLE": "Governing Law",
+		"SECTION_8_CONTENT": "These terms are governed by the laws of the applicable jurisdiction, without regard to conflict of law principles."
 	}
 }

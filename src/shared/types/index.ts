@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import type * as React from 'react'
 
 export interface RootLayoutProps {
 	readonly children: ReactNode
@@ -48,4 +49,27 @@ export interface ErrorDisplayProps extends ErrorBoundaryProps {
 
 export interface LoadingSpinnerProps {
 	message: string
+}
+
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement>
+
+export type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement>
+
+export interface FormFieldProps {
+	label: string
+	error?: string
+	required?: boolean
+	inputProps: InputProps & { id: string; name: string }
+}
+
+export interface FormErrorProps {
+	message: string
+}
+
+export interface OtpInputProps {
+	length?: number
+	value: string
+	onChange: (value: string) => void
+	disabled?: boolean
+	className?: string
 }

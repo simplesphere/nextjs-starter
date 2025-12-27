@@ -1,0 +1,5 @@
+export { ResetPasswordForm } from '@/features/auth/reset-password/ui/reset-password-form'
+export type { ResetPasswordFormData } from '@/features/auth/reset-password/model/schema'
+export { resetPasswordSchema } from '@/features/auth/reset-password/model/schema'
+export { resetPasswordAction } from '@/features/auth/reset-password/api/actions'
+export type { ResetPasswordResult } from '@/features/auth/reset-password/model/types'
