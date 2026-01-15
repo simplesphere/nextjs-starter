@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
 /**
@@ -7,7 +7,7 @@ import { describe, expect, it } from 'vitest'
  */
 describe('Example Test', () => {
 	it('should render a simple component', () => {
-		render(<div>Hello World</div>)
-		expect(screen.getByText('Hello World')).toBeInTheDocument()
+		const { container } = render(<div>Hello World</div>)
+		expect(container.textContent).toBe('Hello World')
 	})
 })

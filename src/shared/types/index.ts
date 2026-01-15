@@ -73,3 +73,8 @@ export interface OtpInputProps {
 	disabled?: boolean
 	className?: string
 }
+
+export interface LayoutDashboardProps {
+	children: ReactNode
+	params: Promise<LocaleLayoutParams>
+}

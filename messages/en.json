@@ -118,8 +118,22 @@
 		"PAGES": "Pages",
 		"HOME": "Home",
 		"ABOUT": "About",
-		"PRIVACY": "Privacy Policy",
-		"TERMS": "Terms of Service"
+		"AUTH": {
+			"TITLE": "Auth",
+			"LOGIN": "Login",
+			"RESET_PASSWORD": "Reset Password",
+			"VERIFY_OTP": "2FA / Verify OTP",
+			"FORGOT_PASSWORD": "Forgot Password"
+		},
+		"DASHBOARD": {
+			"TITLE": "Dashboard",
+			"HOME": "Home"
+		},
+		"PRIVACY": {
+			"TITLE": "Privacy",
+			"PRIVACY_POLICY": "Privacy Policy",
+			"TERMS_OF_SERVICE": "Terms of Service"
+		}
 	},
 	"FOOTER": {
 		"COPYRIGHT": "© {year} Next.js Starter. All rights reserved.",
@@ -171,5 +185,33 @@
 		"SECTION_7_CONTENT": "We may update these Terms of Service from time to time. Continued use of the service means you accept the updated terms.",
 		"SECTION_8_TITLE": "Governing Law",
 		"SECTION_8_CONTENT": "These terms are governed by the laws of the applicable jurisdiction, without regard to conflict of law principles."
+	},
+	"SIDEBAR": {
+		"NAVIGATION": "Navigation",
+		"NAV_ITEMS": {
+			"OVERVIEW": "Overview",
+			"DASHBOARD": "Dashboard",
+			"ANALYTICS": "Analytics",
+			"PROJECTS": "Projects",
+			"TEAM": "Team",
+			"SETTINGS": "Settings"
+		},
+		"ACCOUNT_SWITCHER": {
+			"ACCOUNTS": "Accounts",
+			"ADD_ACCOUNT": "Add account"
+		},
+		"USER_MENU": {
+			"PROFILE": "Profile",
+			"BILLING": "Billing",
+			"SETTINGS": "Settings",
+			"LOG_OUT": "Log out"
+		}
+	},
+	"DASHBOARD": {
+		"TITLE": "Dashboard",
+		"DESCRIPTION": "Welcome to your dashboard. Here you can manage your account and view your data.",
+		"BREADCRUMB": {
+			"HOME": "Home"
+		}
 	}
 }

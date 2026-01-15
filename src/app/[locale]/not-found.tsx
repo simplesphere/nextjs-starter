@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 import { Home } from 'lucide-react'
 import { Link } from '@/shared/config/i18n'
+import { Heading } from '@/shared/ui'
 
 /**
  * 404 Not Found page component for locale-specific routes.
@@ -17,9 +18,13 @@ export default async function NotFound() {
 		<div className="flex min-h-screen items-center justify-center bg-zinc-50 px-4 dark:bg-black">
 			<div className="w-full max-w-md space-y-6 text-center">
 				<div className="space-y-4">
-					<h1 className="text-7xl font-bold text-zinc-900 dark:text-zinc-50">{t('TITLE')}</h1>
-					<h2 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">{t('HEADING')}</h2>
-					<p className="text-zinc-600 dark:text-zinc-400">{t('DESCRIPTION')}</p>
+					<Heading as="h1" size="3xl">
+						{t('TITLE')}
+					</Heading>
+					<Heading as="h2" size="lg">
+						{t('HEADING')}
+					</Heading>
+					<p>{t('DESCRIPTION')}</p>
 				</div>
 				<Link
 					href="/"

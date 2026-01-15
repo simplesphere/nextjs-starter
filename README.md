@@ -21,6 +21,8 @@ bun install  # or: npm install / yarn install
 bun dev      # or: npm run dev / yarn dev
 ```
 
+**Note**: If using Node.js directly, ensure you're using Node.js >=22.14.0 (see `.nvmrc` for version).
+
 Open http://localhost:3000
 
 ## Scripts
@@ -46,13 +48,22 @@ Open http://localhost:3000
 src/
 ├── app/              # Next.js App Router
 │   └── [locale]/     # Internationalized routes
-├── shared/           # Shared layer (FSD)
-│   ├── ui/           # Components
-│   ├── constants/    # Constants
-│   ├── lib/          # Utilities
-│   ├── types/        # TypeScript types
-│   └── config/       # Configuration
-└── features/         # Feature modules (FSD)
+├── entities/         # Business entities (FSD)
+│   ├── user/         # User entity
+│   └── account/      # Account entity
+├── features/         # Feature modules (FSD)
+│   ├── auth/         # Authentication features
+│   ├── account-switcher/
+│   └── user-menu/
+├── widgets/          # Composite UI blocks (FSD)
+│   ├── navigation/   # Navigation widget
+│   └── sidebar/      # Sidebar widget
+└── shared/           # Shared utilities (FSD)
+    ├── ui/           # UI components
+    ├── constants/    # Constants
+    ├── lib/          # Utilities
+    ├── types/        # TypeScript types
+    └── config/       # Configuration
 ```
 
 ## Path Aliases
@@ -60,8 +71,10 @@ src/
 Configured in `tsconfig.json`:
 
 - `@/*` → `./src/*`
-- `@shared/*` → `./src/shared/*`
+- `@entities/*` → `./src/entities/*`
 - `@features/*` → `./src/features/*`
+- `@widgets/*` → `./src/widgets/*`
+- `@shared/*` → `./src/shared/*`
 - `@assets/*` → `./src/shared/assets/*`
 - `@config/*` → `./src/shared/config/*`
 - `@constants/*` → `./src/shared/constants/*`
@@ -127,7 +140,8 @@ Opens interactive bundle visualizations powered by
 docker-compose up
 ```
 
-Uses npm in Docker (included with Node.js). For local development, Bun is preferred.
+Uses Bun for building in Docker, Node.js for runtime (Next.js standalone output requires Node.js). For local
+development, Bun is preferred.
 
 ## Resources
 
