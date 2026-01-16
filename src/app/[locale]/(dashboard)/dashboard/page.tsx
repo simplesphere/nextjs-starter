@@ -1,6 +1,17 @@
 import { getTranslations } from 'next-intl/server'
+import type { Metadata, ResolvingMetadata } from 'next'
+import { createPageMetadata } from '@/shared/lib/metadata'
+import type { GenerateMetadataProps } from '@/shared/types'
 import { Heading } from '@/shared/ui'
 import { type BreadcrumbItem, DashboardPageWrapper } from '@/widgets/sidebar'
+
+export async function generateMetadata(
+	{ params }: GenerateMetadataProps,
+	parent: ResolvingMetadata
+): Promise<Metadata> {
+	const { locale } = await params
+	return createPageMetadata('METADATA.DASHBOARD', locale, parent)
+}
 
 /**
  * Dashboard page component.

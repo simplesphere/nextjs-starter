@@ -1,7 +1,44 @@
 {
 	"METADATA": {
 		"TITLE": "Next.js Starter",
-		"DESCRIPTION": "A modern Next.js starter template with internationalization support"
+		"SITE_NAME": "Next.js Starter",
+		"DESCRIPTION": "A modern Next.js starter template with internationalization support",
+		"HOME": {
+			"TITLE": "Welcome to Next.js Starter",
+			"DESCRIPTION": "A production-ready starter template with TypeScript, Tailwind CSS, and comprehensive tooling."
+		},
+		"ABOUT": {
+			"TITLE": "About - Next.js Starter",
+			"DESCRIPTION": "Learn more about this starter template and its features."
+		},
+		"DASHBOARD": {
+			"TITLE": "Dashboard - Next.js Starter",
+			"DESCRIPTION": "Welcome to your dashboard. Here you can manage your account and view your data."
+		},
+		"LOGIN": {
+			"TITLE": "Sign in - Next.js Starter",
+			"DESCRIPTION": "Enter your credentials to access your account."
+		},
+		"FORGOT_PASSWORD": {
+			"TITLE": "Forgot password - Next.js Starter",
+			"DESCRIPTION": "Enter your email address and we'll send you a verification code."
+		},
+		"VERIFY_OTP": {
+			"TITLE": "Verify code - Next.js Starter",
+			"DESCRIPTION": "Enter the 6-digit verification code sent to your email."
+		},
+		"RESET_PASSWORD": {
+			"TITLE": "Reset password - Next.js Starter",
+			"DESCRIPTION": "Set a new password for your account."
+		},
+		"PRIVACY": {
+			"TITLE": "Privacy Policy - Next.js Starter",
+			"DESCRIPTION": "This Privacy Policy explains how we collect, use, and protect your information when you use our services."
+		},
+		"TERMS": {
+			"TITLE": "Terms of Service - Next.js Starter",
+			"DESCRIPTION": "These Terms of Service govern your use of our services. By accessing or using the service, you agree to these terms."
+		}
 	},
 	"ERROR": {
 		"TITLE": "Something went wrong",
@@ -167,24 +204,32 @@
 	},
 	"TERMS": {
 		"TITLE": "Terms of Service",
-		"INTRO": "These Terms of Service govern your use of our services. By accessing or using the service, you agree to these terms.",
+		"INTRO": "These Terms of Service govern your use of our services. By accessing or using the service, you agree to be bound by these terms. Please read them carefully before using our services.",
 		"BACK": "Back to Home",
-		"SECTION_1_TITLE": "Use of the Service",
-		"SECTION_1_CONTENT": "You agree to use the service only for lawful purposes and in accordance with these terms. You may not misuse, disrupt, or attempt to gain unauthorized access to the service.",
-		"SECTION_2_TITLE": "Accounts",
-		"SECTION_2_CONTENT": "If you create an account, you are responsible for maintaining its security and for all activity under your account.",
-		"SECTION_3_TITLE": "Intellectual Property",
-		"SECTION_3_CONTENT": "All content, software, and materials provided through the service are owned by us or our licensors. You may not copy, modify, or distribute them without permission.",
-		"SECTION_4_TITLE": "Disclaimer",
-		"SECTION_4_CONTENT": "The service is provided on an as is and as available basis. We make no warranties of any kind, express or implied.",
-		"SECTION_5_TITLE": "Limitation of Liability",
-		"SECTION_5_CONTENT": "To the maximum extent permitted by law, we are not liable for any indirect, incidental, or consequential damages arising from your use of the service.",
-		"SECTION_6_TITLE": "Termination",
-		"SECTION_6_CONTENT": "We may suspend or terminate access to the service at any time if you violate these terms.",
-		"SECTION_7_TITLE": "Changes to the Terms",
-		"SECTION_7_CONTENT": "We may update these Terms of Service from time to time. Continued use of the service means you accept the updated terms.",
-		"SECTION_8_TITLE": "Governing Law",
-		"SECTION_8_CONTENT": "These terms are governed by the laws of the applicable jurisdiction, without regard to conflict of law principles."
+		"SECTION_1_TITLE": "Acceptance of Terms",
+		"SECTION_1_CONTENT": "By accessing or using our service, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any part of these terms, you may not use the service. These terms apply to all users of the service, including without limitation users who are browsers, vendors, customers, merchants, and contributors of content.",
+		"SECTION_2_TITLE": "Use of the Service",
+		"SECTION_2_CONTENT": "You agree to use the service only for lawful purposes and in accordance with these terms. You may not misuse, disrupt, or attempt to gain unauthorized access to the service, its servers, or any connected networks. You agree not to use the service in any way that could damage, disable, overburden, or impair the service or interfere with any other party's use and enjoyment of the service. Prohibited activities include, but are not limited to, transmitting any worms, viruses, or any code of a destructive nature, or engaging in any activity that violates any applicable laws or regulations.",
+		"SECTION_3_TITLE": "User Accounts",
+		"SECTION_3_CONTENT": "If you create an account with us, you are responsible for maintaining the security of your account and password. We cannot and will not be liable for any loss or damage from your failure to comply with this security obligation. You are responsible for all activities that occur under your account, whether authorized by you or not. You must immediately notify us of any unauthorized use of your account or any other breach of security. We reserve the right to refuse service, terminate accounts, remove or edit content, or cancel orders at our sole discretion.",
+		"SECTION_4_TITLE": "Intellectual Property",
+		"SECTION_4_CONTENT": "All content, software, and materials provided through the service, including but not limited to text, graphics, logos, icons, images, audio clips, digital downloads, data compilations, and software, are the property of the service provider or its content suppliers and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws. You may not reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish, download, store, or transmit any of the material on our service without our prior written consent, except as permitted by these terms or applicable law.",
+		"SECTION_5_TITLE": "User Content",
+		"SECTION_5_CONTENT": "If you post, upload, input, provide, or submit content to our service, you grant us a worldwide, non-exclusive, royalty-free, perpetual, irrevocable, and fully sublicensable right to use, reproduce, modify, adapt, publish, translate, create derivative works from, distribute, and display such content throughout the world in any media. You represent and warrant that you own or otherwise control all of the rights to the content that you post and that the content is accurate, does not violate these terms, and will not cause injury to any person or entity.",
+		"SECTION_6_TITLE": "Disclaimer of Warranties",
+		"SECTION_6_CONTENT": "The service is provided on an \"as is\" and \"as available\" basis. We make no representations or warranties of any kind, express or implied, as to the operation of the service or the information, content, materials, or products included on or otherwise made available through the service. You expressly agree that your use of the service is at your sole risk. We do not warrant that the service will be uninterrupted, timely, secure, or error-free, or that defects will be corrected. No oral or written information or advice given by us shall create a warranty.",
+		"SECTION_7_TITLE": "Limitation of Liability",
+		"SECTION_7_CONTENT": "To the fullest extent permitted by applicable law, in no event shall we, our affiliates, agents, directors, employees, suppliers, or licensors be liable for any indirect, punitive, incidental, special, consequential, or exemplary damages, including without limitation damages for loss of profits, goodwill, use, data, or other intangible losses, arising out of or relating to the use of, or inability to use, the service. Under no circumstances will we be responsible for any damage, loss, or injury resulting from hacking, tampering, or other unauthorized access or use of the service or your account or the information contained therein.",
+		"SECTION_8_TITLE": "Indemnification",
+		"SECTION_8_CONTENT": "You agree to defend, indemnify, and hold harmless us, our affiliates, licensors, and service providers, and our and their respective officers, directors, employees, contractors, agents, licensors, suppliers, successors, and assigns from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising out of or relating to your violation of these Terms of Service or your use of the service, including, but not limited to, your User Content, any use of the service's content, services, and products other than as expressly authorized in these Terms of Service, or your use of any information obtained from the service.",
+		"SECTION_9_TITLE": "Termination",
+		"SECTION_9_CONTENT": "We may suspend or terminate your access to the service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms of Service. Upon termination, your right to use the service will immediately cease. If you wish to terminate your account, you may simply discontinue using the service. All provisions of the Terms of Service which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity, and limitations of liability.",
+		"SECTION_10_TITLE": "Changes to the Terms",
+		"SECTION_10_CONTENT": "We reserve the right, at our sole discretion, to modify or replace these Terms of Service at any time. If a revision is material, we will try to provide at least 30 days notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion. By continuing to access or use our service after those revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, please stop using the service.",
+		"SECTION_11_TITLE": "Governing Law and Jurisdiction",
+		"SECTION_11_CONTENT": "These Terms of Service shall be governed by and construed in accordance with the laws of the applicable jurisdiction, without regard to its conflict of law provisions. Any disputes arising under or in connection with these terms shall be subject to the exclusive jurisdiction of the courts located in the applicable jurisdiction. Our failure to enforce any right or provision of these Terms of Service will not be considered a waiver of those rights.",
+		"SECTION_12_TITLE": "Contact Information",
+		"SECTION_12_CONTENT": "If you have any questions about these Terms of Service, please contact us through our official support channels. We are committed to addressing your concerns and will respond to inquiries in a timely manner. For legal matters, please ensure you provide sufficient detail to help us understand and address your question or concern."
 	},
 	"SIDEBAR": {
 		"NAVIGATION": "Navigation",

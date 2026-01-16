@@ -1,7 +1,18 @@
 import { getTranslations } from 'next-intl/server'
+import type { Metadata, ResolvingMetadata } from 'next'
 import { ArrowLeft } from 'lucide-react'
 import { Link } from '@/shared/config/i18n'
+import { createPageMetadata } from '@/shared/lib/metadata'
+import type { GenerateMetadataProps } from '@/shared/types'
 import { Heading } from '@/shared/ui'
+
+export async function generateMetadata(
+	{ params }: GenerateMetadataProps,
+	parent: ResolvingMetadata
+): Promise<Metadata> {
+	const { locale } = await params
+	return createPageMetadata('METADATA.ABOUT', locale, parent)
+}
 
 /**
  * About page component with lorem ipsum content.

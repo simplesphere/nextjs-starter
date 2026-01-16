@@ -5,18 +5,40 @@ import { notFound } from 'next/navigation'
 import { googleSans } from '@/shared/config/fonts'
 import { routing } from '@/shared/config/i18n'
 import { ThemeProvider } from '@/shared/providers/theme-provider'
-import type { LocaleLayoutProps } from '@/shared/types'
+import type { GenerateMetadataProps, LocaleLayoutProps } from '@/shared/types'
 
 export function generateStaticParams() {
 	return routing.locales.map(locale => ({ locale }))
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-	const t = await getTranslations('METADATA')
+export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
+	const { locale } = await params
+	const t = await getTranslations({ locale, namespace: 'METADATA' })
 
 	return {
-		title: t('TITLE'),
-		description: t('DESCRIPTION')
+		metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+		title: {
+			template: `%s | ${t('SITE_NAME')}`,
+			default: t('TITLE')
+		},
+		description: t('DESCRIPTION'),
+		openGraph: {
+			type: 'website',
+			locale,
+			images: [
+				{
+					url: '/placeholder.svg',
+					width: 1200,
+					height: 630,
+					alt: t('TITLE')
+				}
+			],
+			siteName: t('SITE_NAME')
+		},
+		twitter: {
+			card: 'summary_large_image',
+			images: ['/placeholder.svg']
+		}
 	}
 }
 

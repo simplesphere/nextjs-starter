@@ -1,8 +1,19 @@
 import { getTranslations } from 'next-intl/server'
+import type { Metadata, ResolvingMetadata } from 'next'
 import { Stopwatch } from '@/features/home'
 import { Link } from '@/shared/config/i18n'
+import { createPageMetadata } from '@/shared/lib/metadata'
+import type { GenerateMetadataProps } from '@/shared/types'
 import { Footer, Heading, ThemeToggle } from '@/shared/ui'
 import { Navigation } from '@/widgets/navigation'
+
+export async function generateMetadata(
+	{ params }: GenerateMetadataProps,
+	parent: ResolvingMetadata
+): Promise<Metadata> {
+	const { locale } = await params
+	return createPageMetadata('METADATA.HOME', locale, parent)
+}
 
 /**
  * Home page component.

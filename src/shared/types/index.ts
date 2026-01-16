@@ -78,3 +78,12 @@ export interface LayoutDashboardProps {
 	children: ReactNode
 	params: Promise<LocaleLayoutParams>
 }
+
+/**
+ * Props for generateMetadata function in page components.
+ * Follows Next.js 16 metadata API conventions.
+ */
+export interface GenerateMetadataProps {
+	params: Promise<LocaleLayoutParams>
+	searchParams?: Promise<Record<string, string | string[] | undefined>>
+}
