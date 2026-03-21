@@ -101,7 +101,7 @@
 				"EMAIL_REQUIRED": "Email is required",
 				"EMAIL_INVALID": "Please enter a valid email address",
 				"PASSWORD_REQUIRED": "Password is required",
-				"PASSWORD_MIN_LENGTH": "Password must be at least 6 characters",
+				"PASSWORD_MIN_LENGTH": "Password must be at least 8 characters",
 				"GENERAL": "An error occurred. Please try again."
 			}
 		},
@@ -144,7 +144,7 @@
 			"BACK": "Back to Login",
 			"ERRORS": {
 				"PASSWORD_REQUIRED": "Password is required",
-				"PASSWORD_MIN_LENGTH": "Password must be at least 6 characters",
+				"PASSWORD_MIN_LENGTH": "Password must be at least 8 characters",
 				"CONFIRM_PASSWORD_REQUIRED": "Please confirm your password",
 				"PASSWORD_MISMATCH": "Passwords do not match",
 				"GENERAL": "An error occurred. Please try again."
@@ -233,6 +233,11 @@
 	},
 	"SIDEBAR": {
 		"NAVIGATION": "Navigation",
+		"PLANS": {
+			"ENTERPRISE": "Enterprise",
+			"PRO": "Pro",
+			"FREE": "Free"
+		},
 		"NAV_ITEMS": {
 			"OVERVIEW": "Overview",
 			"DASHBOARD": "Dashboard",

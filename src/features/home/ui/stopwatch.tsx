@@ -2,17 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { Pause, Play, Square } from 'lucide-react'
+import { Button } from '@/shared/ui/shadcn/button'
 
-/**
- * Stopwatch component with start, pause, and reset functionality.
- *
- * @returns The stopwatch component
- *
- * @example
- * ```tsx
- * <Stopwatch />
- * ```
- */
 export function Stopwatch() {
 	const [time, setTime] = useState(0)
 	const [isRunning, setIsRunning] = useState(false)
@@ -59,37 +50,27 @@ export function Stopwatch() {
 	}
 
 	return (
-		<div className="flex flex-col items-center gap-6 rounded-2xl border border-zinc-200 bg-white p-8 shadow-lg dark:border-zinc-800 dark:bg-zinc-900">
+		<div className="flex flex-col items-center gap-6 rounded-2xl border border-border bg-card p-8 shadow-lg">
 			<div className="text-center">
-				<div className="font-mono text-6xl font-bold text-zinc-900 dark:text-zinc-50">{formatTime(time)}</div>
-				<p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">Stopwatch</p>
+				<div className="font-mono text-6xl font-bold text-foreground">{formatTime(time)}</div>
+				<p className="mt-2 text-sm text-muted-foreground">Stopwatch</p>
 			</div>
 			<div className="flex gap-3">
 				{!isRunning ? (
-					<button
-						onClick={handleStart}
-						className="flex items-center gap-2 rounded-lg bg-zinc-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
-					>
+					<Button onClick={handleStart} size="lg">
 						<Play className="h-4 w-4" />
 						Start
-					</button>
+					</Button>
 				) : (
-					<button
-						onClick={handlePause}
-						className="flex items-center gap-2 rounded-lg bg-zinc-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
-					>
+					<Button onClick={handlePause} size="lg">
 						<Pause className="h-4 w-4" />
 						Pause
-					</button>
+					</Button>
 				)}
-				<button
-					onClick={handleReset}
-					disabled={time === 0}
-					className="flex items-center gap-2 rounded-lg border border-zinc-300 px-6 py-3 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-700 dark:text-zinc-50 dark:hover:bg-zinc-800"
-				>
+				<Button onClick={handleReset} variant="outline" size="lg" disabled={time === 0}>
 					<Square className="h-4 w-4" />
 					Reset
-				</button>
+				</Button>
 			</div>
 		</div>
 	)

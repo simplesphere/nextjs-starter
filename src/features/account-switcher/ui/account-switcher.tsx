@@ -27,6 +27,7 @@ import { type Account, accountData } from '@/entities/account'
  */
 export function AccountSwitcher() {
 	const t = useTranslations('SIDEBAR.ACCOUNT_SWITCHER')
+	const plansT = useTranslations('SIDEBAR.PLANS')
 	const [activeAccount, setActiveAccount] = React.useState<Account>(accountData[0] as Account)
 
 	return (
@@ -38,12 +39,12 @@ export function AccountSwitcher() {
 							size="lg"
 							className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
 						>
-							<div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+							<div className="flex aspect-square size-8 items-center justify-center rounded-sm bg-sidebar-primary text-sidebar-primary-foreground">
 								<Building2 className="size-4" />
 							</div>
 							<div className="flex flex-col gap-0.5 leading-none">
 								<span className="font-semibold">{activeAccount.name}</span>
-								<span className="text-xs text-muted-foreground">{activeAccount.plan}</span>
+								<span className="text-xs text-muted-foreground">{plansT(activeAccount.plan)}</span>
 							</div>
 							<ChevronsUpDown className="ml-auto" />
 						</SidebarMenuButton>
@@ -56,19 +57,19 @@ export function AccountSwitcher() {
 								onClick={() => setActiveAccount(account)}
 								className="cursor-pointer gap-2"
 							>
-								<div className="flex aspect-square size-6 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
+								<div className="flex aspect-square size-6 items-center justify-center rounded-sm bg-sidebar-primary text-sidebar-primary-foreground">
 									<Building2 className="size-3" />
 								</div>
 								<div className="flex flex-1 flex-col">
 									<div className="font-medium">{account.name}</div>
-									<div className="text-xs text-muted-foreground">{account.plan}</div>
+									<div className="text-xs text-muted-foreground">{plansT(account.plan)}</div>
 								</div>
 								{activeAccount.name === account.name && <Check className="size-4" />}
 							</DropdownMenuItem>
 						))}
 						<DropdownMenuSeparator />
 						<DropdownMenuItem className="cursor-pointer gap-2">
-							<div className="flex aspect-square size-6 items-center justify-center rounded-md border border-sidebar-border">
+							<div className="flex aspect-square size-6 items-center justify-center rounded-sm border border-sidebar-border">
 								<Plus className="size-3" />
 							</div>
 							<div className="font-medium">{t('ADD_ACCOUNT')}</div>

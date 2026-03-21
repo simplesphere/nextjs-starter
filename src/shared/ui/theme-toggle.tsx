@@ -17,7 +17,7 @@ import { Button } from '@/shared/ui/shadcn/button'
  * ```
  */
 export function ThemeToggle() {
-	const { theme, setTheme, resolvedTheme } = useTheme()
+	const { setTheme, resolvedTheme } = useTheme()
 	const t = useTranslations('THEME_TOGGLE')
 
 	return (
@@ -26,7 +26,7 @@ export function ThemeToggle() {
 			size="icon"
 			onClick={() => {
 				if (resolvedTheme) {
-					setTheme(theme === 'dark' ? 'light' : 'dark')
+					setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
 				}
 			}}
 			className={cn('relative h-9 w-9')}

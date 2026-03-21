@@ -2,7 +2,7 @@
 
 import {
 	Breadcrumb,
-	BreadcrumbItem as BreadcrumbItemComponent,
+	BreadcrumbItem,
 	BreadcrumbLink,
 	BreadcrumbList,
 	BreadcrumbPage,
@@ -32,16 +32,16 @@ import type { DashboardHeaderProps } from '@/widgets/sidebar/model/types'
  */
 export function DashboardHeader({ breadcrumbs }: DashboardHeaderProps) {
 	return (
-		<header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-			<SidebarTrigger className="-ml-1" />
-			<Separator orientation="vertical" className="mr-2 data-[orientation=vertical]:h-4" />
+		<header className="flex h-12 shrink-0 items-center gap-2 border-b px-4">
+			<SidebarTrigger className="-ml-1 size-6 [&>svg]:size-3.5" />
+			<Separator orientation="vertical" className="mr-2 data-[orientation=vertical]:h-3.5" />
 			<Breadcrumb>
 				<BreadcrumbList>
 					{breadcrumbs.map((item, index) => {
 						const isLast = index === breadcrumbs.length - 1
 
 						return (
-							<BreadcrumbItemComponent key={item.id} className={index === 0 ? 'hidden md:block' : ''}>
+							<BreadcrumbItem key={item.id} className={index === 0 ? 'hidden md:block' : ''}>
 								{isLast ? (
 									<BreadcrumbPage data-testid={item['data-testid']}>{item.title}</BreadcrumbPage>
 								) : (
@@ -54,7 +54,7 @@ export function DashboardHeader({ breadcrumbs }: DashboardHeaderProps) {
 										<BreadcrumbSeparator className="hidden md:block" />
 									</>
 								)}
-							</BreadcrumbItemComponent>
+							</BreadcrumbItem>
 						)
 					})}
 				</BreadcrumbList>

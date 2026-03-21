@@ -7,7 +7,7 @@ export interface NavItem {
 	url: string
 }
 
-export interface BreadcrumbItem {
+export interface DashboardBreadcrumb {
 	id: string
 	title: string
 	url?: string
@@ -15,10 +15,10 @@ export interface BreadcrumbItem {
 }
 
 export interface DashboardHeaderProps {
-	breadcrumbs: BreadcrumbItem[]
+	breadcrumbs: DashboardBreadcrumb[]
 }
 
 export interface DashboardPageWrapperProps {
-	breadcrumbs: BreadcrumbItem[]
+	breadcrumbs: DashboardBreadcrumb[]
 	children: ReactNode
 }

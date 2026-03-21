@@ -1,7 +1,10 @@
 'use server'
 
-import type { ResetPasswordFormData } from '@/features/auth/reset-password/model/schema'
+import { headers } from 'next/headers'
+import { type ResetPasswordFormData, resetPasswordSchema } from '@/features/auth/reset-password/model/schema'
 import type { ResetPasswordResult } from '@/features/auth/reset-password/model/types'
+import { rateLimit } from '@/shared/lib/rate-limit'
+import { getClientIp } from '@/shared/lib/rate-limit/get-client-ip'
 
 /**
  * Server action to reset user password.
@@ -25,14 +28,21 @@ export async function resetPasswordAction(
 	resetToken?: string
 ): Promise<ResetPasswordResult> {
 	try {
+		const headersList = await headers()
+		const ip = getClientIp(headersList)
+		const { allowed } = rateLimit(`reset-password:${ip}`, { maxAttempts: 3, windowMs: 60_000 })
+		if (!allowed) {
+			return { success: false, error: 'RATE_LIMIT' }
+		}
+
+		const parsed = resetPasswordSchema.safeParse(data)
+		if (!parsed.success) {
+			return { success: false, error: 'VALIDATION' }
+		}
+
 		await new Promise(resolve => setTimeout(resolve, 1000))
 
-		console.info(
-			'Password reset attempt with token:',
-			resetToken,
-			'for user with new password length:',
-			data.password.length
-		)
+		console.info('Password reset attempt with token:', resetToken)
 
 		return {
 			success: true,

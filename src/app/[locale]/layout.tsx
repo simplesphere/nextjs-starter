@@ -56,7 +56,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 	return (
 		<html lang={locale} className={googleSans.variable} suppressHydrationWarning>
 			<body className="antialiased">
-				<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
 					<NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
 				</ThemeProvider>
 			</body>

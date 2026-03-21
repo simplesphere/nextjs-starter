@@ -1,7 +1,10 @@
 'use server'
 
-import type { ForgotPasswordFormData } from '@/features/auth/forgot-password/model/schema'
+import { headers } from 'next/headers'
+import { type ForgotPasswordFormData, forgotPasswordSchema } from '@/features/auth/forgot-password/model/schema'
 import type { ForgotPasswordResult } from '@/features/auth/forgot-password/model/types'
+import { rateLimit } from '@/shared/lib/rate-limit'
+import { getClientIp } from '@/shared/lib/rate-limit/get-client-ip'
 
 /**
  * Server action to handle forgot password request.
@@ -22,9 +25,19 @@ import type { ForgotPasswordResult } from '@/features/auth/forgot-password/model
  */
 export async function forgotPasswordAction(data: ForgotPasswordFormData): Promise<ForgotPasswordResult> {
 	try {
-		await new Promise(resolve => setTimeout(resolve, 1000))
+		const headersList = await headers()
+		const ip = getClientIp(headersList)
+		const { allowed } = rateLimit(`forgot-password:${ip}`, { maxAttempts: 3, windowMs: 60_000 })
+		if (!allowed) {
+			return { success: false, error: 'RATE_LIMIT' }
+		}
 
-		console.info('Forgot password request for:', data.email)
+		const parsed = forgotPasswordSchema.safeParse(data)
+		if (!parsed.success) {
+			return { success: false, error: 'VALIDATION' }
+		}
+
+		await new Promise(resolve => setTimeout(resolve, 1000))
 
 		return {
 			success: true,

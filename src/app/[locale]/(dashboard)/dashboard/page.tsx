@@ -3,7 +3,7 @@ import type { Metadata, ResolvingMetadata } from 'next'
 import { createPageMetadata } from '@/shared/lib/metadata'
 import type { GenerateMetadataProps } from '@/shared/types'
 import { Heading } from '@/shared/ui'
-import { type BreadcrumbItem, DashboardPageWrapper } from '@/widgets/sidebar'
+import { type DashboardBreadcrumb, DashboardPageWrapper } from '@/widgets/sidebar'
 
 export async function generateMetadata(
 	{ params }: GenerateMetadataProps,
@@ -21,7 +21,7 @@ export async function generateMetadata(
 export default async function DashboardPage() {
 	const t = await getTranslations('DASHBOARD')
 
-	const breadcrumbs: BreadcrumbItem[] = [
+	const breadcrumbs: DashboardBreadcrumb[] = [
 		{
 			id: 'home',
 			title: t('BREADCRUMB.HOME'),

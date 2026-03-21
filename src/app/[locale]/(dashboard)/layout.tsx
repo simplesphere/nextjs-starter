@@ -1,6 +1,5 @@
 import { SidebarInset, SidebarProvider } from '@shared/ui/shadcn/sidebar'
 import type { LayoutDashboardProps } from '@/shared/types'
-import '@/app/globals.css'
 import { AppSidebar } from '@/widgets/sidebar'
 
 /**
@@ -13,9 +12,7 @@ import { AppSidebar } from '@/widgets/sidebar'
  * @param props.params - The route parameters
  * @returns The dashboard layout
  */
-export default async function LayoutDashboard({ children, params }: LayoutDashboardProps) {
-	await params
-
+export default async function LayoutDashboard({ children }: Omit<LayoutDashboardProps, 'params'>) {
 	return (
 		<div className="fixed inset-0 z-50 flex h-screen w-screen overflow-hidden bg-background">
 			<SidebarProvider>

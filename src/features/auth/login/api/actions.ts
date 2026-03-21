@@ -1,7 +1,10 @@
 'use server'
 
-import type { LoginFormData } from '@/features/auth/login/model/schema'
+import { headers } from 'next/headers'
+import { type LoginFormData, loginSchema } from '@/features/auth/login/model/schema'
 import type { LoginResult } from '@/features/auth/login/model/types'
+import { rateLimit } from '@/shared/lib/rate-limit'
+import { getClientIp } from '@/shared/lib/rate-limit/get-client-ip'
 
 /**
  * Server action to handle user login.
@@ -21,9 +24,19 @@ import type { LoginResult } from '@/features/auth/login/model/types'
  */
 export async function loginAction(data: LoginFormData): Promise<LoginResult> {
 	try {
-		await new Promise(resolve => setTimeout(resolve, 1000))
+		const headersList = await headers()
+		const ip = getClientIp(headersList)
+		const { allowed } = rateLimit(`login:${ip}`, { maxAttempts: 5, windowMs: 60_000 })
+		if (!allowed) {
+			return { success: false, error: 'RATE_LIMIT' }
+		}
 
-		console.info('Login attempt:', data.email)
+		const parsed = loginSchema.safeParse(data)
+		if (!parsed.success) {
+			return { success: false, error: 'VALIDATION' }
+		}
+
+		await new Promise(resolve => setTimeout(resolve, 1000))
 
 		return {
 			success: true,

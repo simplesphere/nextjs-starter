@@ -1,7 +1,10 @@
 'use server'
 
-import type { VerifyOtpFormData } from '@/features/auth/verify-otp/model/schema'
+import { headers } from 'next/headers'
+import { type VerifyOtpFormData, verifyOtpSchema } from '@/features/auth/verify-otp/model/schema'
 import type { VerifyOtpResult } from '@/features/auth/verify-otp/model/types'
+import { rateLimit } from '@/shared/lib/rate-limit'
+import { getClientIp } from '@/shared/lib/rate-limit/get-client-ip'
 
 /**
  * Server action to verify OTP code.
@@ -21,9 +24,19 @@ import type { VerifyOtpResult } from '@/features/auth/verify-otp/model/types'
  */
 export async function verifyOtpAction(data: VerifyOtpFormData): Promise<VerifyOtpResult> {
 	try {
-		await new Promise(resolve => setTimeout(resolve, 1000))
+		const headersList = await headers()
+		const ip = getClientIp(headersList)
+		const { allowed } = rateLimit(`verify-otp:${ip}`, { maxAttempts: 5, windowMs: 60_000 })
+		if (!allowed) {
+			return { success: false, error: 'RATE_LIMIT' }
+		}
 
-		console.info('OTP verification attempt:', data.otp)
+		const parsed = verifyOtpSchema.safeParse(data)
+		if (!parsed.success) {
+			return { success: false, error: 'VALIDATION' }
+		}
+
+		await new Promise(resolve => setTimeout(resolve, 1000))
 
 		return {
 			success: true,
