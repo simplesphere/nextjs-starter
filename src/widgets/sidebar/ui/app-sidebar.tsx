@@ -15,32 +15,22 @@ import {
 } from '@shared/ui/shadcn/sidebar'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@shared/ui/shadcn/tooltip'
 import { useTranslations } from 'next-intl'
-import { AccountSwitcher } from '@/features/account-switcher'
 import { UserMenu } from '@/features/user-menu'
+import { WorkspaceSwitcher } from '@/features/workspace-switcher'
 import { Link } from '@/shared/config/i18n'
 import { getSidebarNavItems } from '@/widgets/sidebar/model/config'
+import type { AppSidebarProps } from '@/widgets/sidebar/model/types'
 
-/**
- * Main application sidebar component.
- * Provides navigation and user account management.
- *
- * @returns The app sidebar component
- *
- * @example
- * ```tsx
- * <AppSidebar />
- * ```
- */
-export function AppSidebar() {
+export function AppSidebar({ workspace }: AppSidebarProps) {
 	const t = useTranslations('SIDEBAR')
 	const navT = useTranslations('SIDEBAR.NAV_ITEMS')
 
-	const navItems = getSidebarNavItems(navT)
+	const navItems = getSidebarNavItems(navT, workspace.slug)
 
 	return (
 		<Sidebar collapsible="icon">
-			<SidebarHeader>
-				<AccountSwitcher />
+			<SidebarHeader className="h-12 justify-center border-b p-2">
+				<WorkspaceSwitcher currentWorkspace={workspace} />
 			</SidebarHeader>
 			<SidebarContent>
 				<SidebarGroup>

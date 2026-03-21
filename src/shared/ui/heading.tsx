@@ -1,17 +1,5 @@
-import type { ReactNode } from 'react'
 import { cn } from '@/shared/lib/utils'
-
-export type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-
-export type HeadingSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
-
-export interface HeadingProps {
-	as?: HeadingLevel
-	size?: HeadingSize
-	uppercase?: boolean
-	className?: string
-	children: ReactNode
-}
+import type { HeadingLevel, HeadingProps, HeadingSize } from '@/shared/types'
 
 const sizeClasses: Record<HeadingSize, string> = {
 	xs: 'text-sm',

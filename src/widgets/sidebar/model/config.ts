@@ -1,13 +1,15 @@
 import { BarChart3, FolderOpen, Home, LayoutDashboard, Settings, Users } from 'lucide-react'
 import type { NavItem } from '@/widgets/sidebar/model/types'
 
-export function getSidebarNavItems(navT: (key: string) => string): NavItem[] {
+export function getSidebarNavItems(navT: (key: string) => string, workspaceSlug: string): NavItem[] {
+	const base = `/dashboard/${workspaceSlug}`
+
 	return [
-		{ title: navT('OVERVIEW'), icon: Home, url: '/dashboard' },
-		{ title: navT('DASHBOARD'), icon: LayoutDashboard, url: '/dashboard' },
-		{ title: navT('ANALYTICS'), icon: BarChart3, url: '/dashboard' },
-		{ title: navT('PROJECTS'), icon: FolderOpen, url: '/dashboard' },
-		{ title: navT('TEAM'), icon: Users, url: '/dashboard' },
-		{ title: navT('SETTINGS'), icon: Settings, url: '/dashboard' }
+		{ title: navT('OVERVIEW'), icon: Home, url: base },
+		{ title: navT('DASHBOARD'), icon: LayoutDashboard, url: base },
+		{ title: navT('ANALYTICS'), icon: BarChart3, url: `${base}/analytics` },
+		{ title: navT('PROJECTS'), icon: FolderOpen, url: `${base}/projects` },
+		{ title: navT('TEAM'), icon: Users, url: `${base}/team` },
+		{ title: navT('SETTINGS'), icon: Settings, url: `${base}/settings` }
 	]
 }

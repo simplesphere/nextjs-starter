@@ -12,23 +12,21 @@ Production-ready Next.js starter with TypeScript, Tailwind CSS v4, and comprehen
 - **[ShadCN UI](https://ui.shadcn.com)** - UI component library
 - **[React Hook Form](https://react-hook-form.com)** + **[Zod](https://zod.dev)** - Form validation
 - **[Zustand](https://zustand-demo.pmnd.rs)** - State management
-- **[Bun](https://bun.sh/docs)** (preferred) or Node.js >=22.14.0
+- **[Bun](https://bun.sh/docs)** - Package manager and runtime
 - **[ESLint 9](https://eslint.org/docs/latest)** + [Prettier](https://prettier.io/docs)
 - **[Vitest](https://vitest.dev)** + [Testing Library](https://testing-library.com/react)
 
 ## Quick Start
 
 ```bash
-# Install dependencies
-bun install  # or: npm install / yarn install
-
-# Start development server
-bun dev      # or: npm run dev / yarn dev
+bun install
+bun dev
 ```
 
-**Note**: If using Node.js directly, ensure you're using Node.js >=22.14.0 (see `.nvmrc` for version).
-
 Open http://localhost:3000
+
+> **Node.js fallback**: If not using Bun, ensure Node.js >=22.14.0 (see `.nvmrc`). All scripts work with `node` but Bun
+> is the project standard.
 
 ## Scripts
 
@@ -55,15 +53,17 @@ This project follows [Feature-Sliced Design (FSD)](https://feature-sliced.design
 src/
 ├── app/              # Next.js App Router (pages & routes)
 │   └── [locale]/     # Internationalized routes
-│       ├── (auth)/    # Authentication pages
-│       ├── (dashboard)/ # Dashboard pages
-│       └── (privacy)/  # Privacy & Terms pages
+│       ├── (auth)/          # Authentication pages (dummy)
+│       ├── (dashboard)/     # Workspace-based dashboard
+│       │   └── dashboard/
+│       │       └── [workspace]/  # Dynamic workspace routes
+│       └── (privacy)/       # Privacy & Terms pages
 ├── entities/         # Business entities (FSD layer)
 │   ├── user/         # User entity
-│   └── account/      # Account entity
+│   └── workspace/    # Workspace entity (name, slug, plan)
 ├── features/         # Feature modules (FSD layer)
-│   ├── auth/         # Authentication features
-│   ├── account-switcher/
+│   ├── auth/         # Authentication features (dummy)
+│   ├── workspace-switcher/  # Workspace navigation
 │   ├── home/         # Home page features
 │   └── user-menu/
 ├── widgets/          # Composite UI blocks (FSD layer)
@@ -78,34 +78,47 @@ src/
     └── providers/    # React providers (theme, etc.)
 
 messages/              # Translation files
-├── en.json           # English translations
-└── [locale].json     # Other locale files
+└── en.json           # English translations
 ```
 
 ### FSD Architecture Rules
 
 - **Layer dependencies**: `app` → `widgets` → `features` → `entities` → `shared`
-- **Import rules**: Use path aliases (`@shared/*`, `@features/*`, etc.), no relative imports
+- **Import rules**: Use `@/` for all FSD layers, `@shared/` for shadcn component imports. No relative imports.
 - **No cross-layer imports**: Lower layers cannot import from higher layers
 
 ## Path Aliases
 
 Configured in `tsconfig.json`:
 
-- `@/*` → `./src/*`
-- `@entities/*` → `./src/entities/*`
-- `@features/*` → `./src/features/*`
-- `@widgets/*` → `./src/widgets/*`
-- `@shared/*` → `./src/shared/*`
-- `@assets/*` → `./src/shared/assets/*`
-- `@config/*` → `./src/shared/config/*`
-- `@constants/*` → `./src/shared/constants/*`
-- `@components/*` → `./src/shared/ui/*`
-- `@ui/*` → `./src/shared/ui/*`
-- `@lib/*` → `./src/shared/lib/*`
-- `@providers/*` → `./src/shared/providers/*`
-- `@types/*` → `./src/shared/types/*`
-- `@utils/*` → `./src/shared/lib/utils/*`
+- `@/*` → `./src/*` (canonical alias for all FSD layers)
+- `@shared/*` → `./src/shared/*` (used by ShadCN codegen)
+
+## Workspace-based Dashboard
+
+The dashboard routes are workspace-scoped:
+
+- `/dashboard` → redirects to default workspace
+- `/dashboard/[workspace]` → workspace dashboard (e.g. `/dashboard/acme-corp`)
+
+The workspace switcher in the sidebar navigates between workspaces via URL. Workspace data is resolved server-side from
+route params — no client-side context needed.
+
+## Authentication (Dummy)
+
+Auth pages (login, forgot password, OTP, reset password) are included as UI scaffolding with form validation. **There is
+no real authentication backend.** Routes are not protected.
+
+When replacing with real auth:
+
+- Add session/cookie validation in `proxy.ts` or workspace layout
+- Protect dashboard routes server-side, not just via client redirect
+- Consider an IdP integration (e.g. Auth.js, Clerk, Supabase Auth)
+
+## Proxy (Next.js 16)
+
+Next.js 16 uses `proxy.ts` (not `middleware.ts`) for request interception. This is where i18n routing and security
+headers (CSP, HSTS, etc.) are configured. Do not rename to `middleware.ts`.
 
 ## Configuration
 
@@ -127,15 +140,14 @@ Configured in `tsconfig.json`:
 - **pre-commit**: Lint-staged (formats + lints staged files)
 - **commit-msg**: [Conventional Commits](https://www.conventionalcommits.org/) validation
 
-**Commit format**: `type(scope?): subject`  
-**Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`, `ci`, `build`, `revert`, `security`
+**Commit format**: `type(scope?): subject` **Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`,
+`perf`, `ci`, `build`, `revert`, `security`
 
 ## Testing
 
 Uses [Vitest](https://vitest.dev) with [React Testing Library](https://testing-library.com/react).
 
 ```typescript
-// Example test
 import { render, screen } from '@testing-library/react'
 import { expect, test } from 'vitest'
 
@@ -162,8 +174,7 @@ Opens interactive bundle visualizations powered by
 docker-compose up
 ```
 
-Uses Bun for building in Docker, Node.js for runtime (Next.js standalone output requires Node.js). For local
-development, Bun is preferred.
+Uses Bun for building, Node.js for runtime (Next.js standalone output requires Node.js).
 
 ## Internationalization (i18n)
 
@@ -198,47 +209,23 @@ const t = useTranslations('MY_SECTION')
 return <h1>{t('TITLE')}</h1>
 ```
 
-3. Use translations in metadata:
-
-```typescript
-export async function generateMetadata({ params }: Props) {
-	const { locale } = await params
-	const t = await getTranslations({ locale, namespace: 'METADATA.MY_PAGE' })
-
-	return {
-		title: t('TITLE'),
-		description: t('DESCRIPTION')
-	}
-}
-```
-
 ### Adding a New Locale
 
 1. Add locale to `src/shared/constants/locales.ts`
 2. Create `messages/[locale].json` with translations
 3. The routing will automatically handle the new locale
 
-## Metadata & SEO
-
-All pages include:
-
-- Translated page titles and descriptions
-- Open Graph (OG) tags for social sharing
-- Twitter Card tags
-- Dynamic metadata generation
-
-Metadata is configured in each page's `generateMetadata` function and uses translations from `messages/[locale].json`.
-
 ## Features
 
-- ✅ **Authentication**: Login, forgot password, OTP verification, reset password
-- ✅ **Dashboard**: Protected dashboard with sidebar navigation
-- ✅ **Internationalization**: Multi-language support with next-intl
-- ✅ **Dark Mode**: System-aware theme switching
-- ✅ **Form Validation**: React Hook Form + Zod schemas
-- ✅ **SEO**: Comprehensive metadata and OG tags
-- ✅ **Error Handling**: Global and locale-specific error boundaries
-- ✅ **Type Safety**: Strict TypeScript with no `any` types
+- **Authentication**: Login, forgot password, OTP verification, reset password (dummy — no backend)
+- **Dashboard**: Workspace-scoped dashboard with sidebar navigation and workspace switcher
+- **Internationalization**: Multi-language support with next-intl
+- **Dark Mode**: System-aware theme switching
+- **Form Validation**: React Hook Form + Zod schemas
+- **SEO**: Comprehensive metadata and OG tags
+- **Error Handling**: Global and locale-specific error boundaries
+- **Type Safety**: Strict TypeScript with no `any` types
+- **Security Headers**: CSP with nonces, HSTS, X-Frame-Options via proxy.ts
 
 ## Resources
 
@@ -252,5 +239,3 @@ Metadata is configured in each page's `generateMetadata` function and uses trans
 - [Bun Docs](https://bun.sh/docs)
 - [Vitest Docs](https://vitest.dev/guide)
 - [Testing Library](https://testing-library.com/react)
-- [ESLint Docs](https://eslint.org/docs/latest)
-- [Prettier Docs](https://prettier.io/docs)

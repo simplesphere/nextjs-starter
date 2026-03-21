@@ -2,7 +2,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { googleSans } from '@/shared/config/fonts'
+import { googleSansFlex } from '@/shared/config/fonts'
 import { routing } from '@/shared/config/i18n'
 import { ThemeProvider } from '@/shared/providers/theme-provider'
 import type { GenerateMetadataProps, LocaleLayoutProps } from '@/shared/types'
@@ -54,7 +54,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 	const messages = await getMessages()
 
 	return (
-		<html lang={locale} className={googleSans.variable} suppressHydrationWarning>
+		<html lang={locale} className={googleSansFlex.variable} suppressHydrationWarning>
 			<body className="antialiased">
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
 					<NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>

@@ -1,5 +1,4 @@
-import type { ReactNode } from 'react'
-import type * as React from 'react'
+import type { InputHTMLAttributes, LabelHTMLAttributes, ReactNode } from 'react'
 
 export interface RootLayoutProps {
 	readonly children: ReactNode
@@ -7,6 +6,10 @@ export interface RootLayoutProps {
 
 export interface LocaleLayoutParams {
 	locale: string
+}
+
+export interface WorkspaceLayoutParams extends LocaleLayoutParams {
+	workspace: string
 }
 
 export interface LocaleLayoutProps {
@@ -51,9 +54,21 @@ export interface LoadingSpinnerProps {
 	message: string
 }
 
-export type InputProps = React.InputHTMLAttributes<HTMLInputElement>
+export type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 
-export type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement>
+export type HeadingSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
+
+export interface HeadingProps {
+	as?: HeadingLevel
+	size?: HeadingSize
+	uppercase?: boolean
+	className?: string
+	children: ReactNode
+}
+
+export type InputProps = InputHTMLAttributes<HTMLInputElement>
+
+export type LabelProps = LabelHTMLAttributes<HTMLLabelElement>
 
 export interface FormFieldProps {
 	label: string
@@ -79,11 +94,25 @@ export interface LayoutDashboardProps {
 	params: Promise<LocaleLayoutParams>
 }
 
+export interface WorkspaceLayoutProps {
+	children: ReactNode
+	params: Promise<WorkspaceLayoutParams>
+}
+
+export interface WorkspacePageProps {
+	params: Promise<WorkspaceLayoutParams>
+}
+
 /**
  * Props for generateMetadata function in page components.
  * Follows Next.js 16 metadata API conventions.
  */
 export interface GenerateMetadataProps {
 	params: Promise<LocaleLayoutParams>
+	searchParams?: Promise<Record<string, string | string[] | undefined>>
+}
+
+export interface WorkspaceMetadataProps {
+	params: Promise<WorkspaceLayoutParams>
 	searchParams?: Promise<Record<string, string | string[] | undefined>>
 }

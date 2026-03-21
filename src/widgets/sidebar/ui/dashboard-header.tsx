@@ -8,53 +8,52 @@ import {
 	BreadcrumbPage,
 	BreadcrumbSeparator
 } from '@shared/ui/shadcn/breadcrumb'
-import { Separator } from '@shared/ui/shadcn/separator'
-import { SidebarTrigger } from '@shared/ui/shadcn/sidebar'
+import { type ComponentType, Fragment } from 'react'
+import { BarChart3, FolderOpen, Home, LayoutDashboard, Settings, Users } from 'lucide-react'
 import { Link } from '@/shared/config/i18n'
-import type { DashboardHeaderProps } from '@/widgets/sidebar/model/types'
+import type { BreadcrumbIconName, DashboardHeaderProps } from '@/widgets/sidebar/model/types'
 
-/**
- * Dashboard header component with sidebar trigger and breadcrumb navigation.
- * Client component required for SidebarTrigger interactivity.
- *
- * @param props - The header props
- * @param props.breadcrumbs - Array of breadcrumb items to display
- * @returns The dashboard header component
- *
- * @example
- * ```tsx
- * const breadcrumbs = [
- *   { id: 'home', title: 'Home', url: '/dashboard' },
- *   { id: 'page', title: 'Current Page' }
- * ]
- * <DashboardHeader breadcrumbs={breadcrumbs} />
- * ```
- */
+const iconMap: Record<BreadcrumbIconName, ComponentType<{ className?: string }>> = {
+	LayoutDashboard,
+	BarChart3,
+	FolderOpen,
+	Users,
+	Settings,
+	Home
+}
+
 export function DashboardHeader({ breadcrumbs }: DashboardHeaderProps) {
 	return (
-		<header className="flex h-12 shrink-0 items-center gap-2 border-b px-4">
-			<SidebarTrigger className="-ml-1 size-6 [&>svg]:size-3.5" />
-			<Separator orientation="vertical" className="mr-2 data-[orientation=vertical]:h-3.5" />
+		<header className="flex h-12 shrink-0 items-center border-b px-4">
 			<Breadcrumb>
 				<BreadcrumbList>
 					{breadcrumbs.map((item, index) => {
 						const isLast = index === breadcrumbs.length - 1
+						const Icon = item.icon ? iconMap[item.icon] : null
 
 						return (
-							<BreadcrumbItem key={item.id} className={index === 0 ? 'hidden md:block' : ''}>
-								{isLast ? (
-									<BreadcrumbPage data-testid={item['data-testid']}>{item.title}</BreadcrumbPage>
-								) : (
-									<>
+							<Fragment key={item.id}>
+								<BreadcrumbItem>
+									{isLast ? (
+										<BreadcrumbPage className="flex items-center gap-1.5" data-testid={item['data-testid']}>
+											{Icon && <Icon className="size-3.5" />}
+											{item.title}
+										</BreadcrumbPage>
+									) : (
 										<BreadcrumbLink asChild>
-											<Link href={item.url ?? '#'} data-testid={item['data-testid']}>
+											<Link
+												href={item.url ?? '#'}
+												className="flex items-center gap-1.5"
+												data-testid={item['data-testid']}
+											>
+												{Icon && <Icon className="size-3.5" />}
 												{item.title}
 											</Link>
 										</BreadcrumbLink>
-										<BreadcrumbSeparator className="hidden md:block" />
-									</>
-								)}
-							</BreadcrumbItem>
+									)}
+								</BreadcrumbItem>
+								{!isLast && <BreadcrumbSeparator />}
+							</Fragment>
 						)
 					})}
 				</BreadcrumbList>

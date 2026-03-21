@@ -246,9 +246,9 @@
 			"TEAM": "Team",
 			"SETTINGS": "Settings"
 		},
-		"ACCOUNT_SWITCHER": {
-			"ACCOUNTS": "Accounts",
-			"ADD_ACCOUNT": "Add account"
+		"WORKSPACE_SWITCHER": {
+			"WORKSPACES": "Workspaces",
+			"ADD_WORKSPACE": "Add workspace"
 		},
 		"USER_MENU": {
 			"PROFILE": "Profile",
@@ -261,7 +261,8 @@
 		"TITLE": "Dashboard",
 		"DESCRIPTION": "Welcome to your dashboard. Here you can manage your account and view your data.",
 		"BREADCRUMB": {
-			"HOME": "Home"
+			"HOME": "Home",
+			"OVERVIEW": "Overview"
 		}
 	}
 }

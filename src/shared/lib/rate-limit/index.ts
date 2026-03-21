@@ -1,19 +1,10 @@
+import type { RateLimitConfig, RateLimitResult } from '@/shared/lib/rate-limit/types'
+
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>()
 
 const MAX_ENTRIES = 10_000
 const CLEANUP_INTERVAL = 50
 let callsSinceCleanup = 0
-
-interface RateLimitConfig {
-	maxAttempts: number
-	windowMs: number
-}
-
-interface RateLimitResult {
-	allowed: boolean
-	remaining: number
-	retryAfterMs: number
-}
 
 /**
  * Removes expired entries from the rate limit map to prevent memory leaks.

@@ -1,24 +1,8 @@
-import localFont from 'next/font/local'
+import { Google_Sans_Flex } from 'next/font/google'
 
-export const googleSans = localFont({
-	src: [
-		{
-			path: '../assets/fonts/GoogleSans-Regular.ttf',
-			weight: '400',
-			style: 'normal'
-		},
-		{
-			path: '../assets/fonts/GoogleSans-Medium.ttf',
-			weight: '500',
-			style: 'normal'
-		},
-		{
-			path: '../assets/fonts/GoogleSans-Bold.ttf',
-			weight: '700',
-			style: 'normal'
-		}
-	],
-	variable: '--font-google-sans',
+export const googleSansFlex = Google_Sans_Flex({
+	subsets: ['latin'],
+	variable: '--font-google-sans-flex',
 	display: 'swap',
 	fallback: ['system-ui', 'arial']
 })
