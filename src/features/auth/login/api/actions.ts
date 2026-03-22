@@ -16,7 +16,8 @@ import { getClientIp } from '@/shared/lib/rate-limit/get-client-ip'
  * ```tsx
  * const result = await loginAction(formData)
  * if (result.success) {
- *   router.push('/dashboard')
+ *   // Navigate to the active workspace dashboard, e.g. /acme-corp/dashboard
+ *   router.push(`/${workspaceSlug}/dashboard`)
  * } else {
  *   setError('root', { message: result.error })
  * }

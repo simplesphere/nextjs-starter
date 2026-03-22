@@ -15,17 +15,7 @@ import { useTranslations } from 'next-intl'
 import { ChevronsUpDown, CreditCard, LogOut, Settings, User } from 'lucide-react'
 import { userData } from '@/entities/user'
 
-/**
- * User menu component for the sidebar.
- * Displays user information and provides menu options.
- *
- * @returns The user menu component
- *
- * @example
- * ```tsx
- * <UserMenu />
- * ```
- */
+/** Sidebar user menu with profile, billing, settings, and logout options. */
 export function UserMenu() {
 	const t = useTranslations('SIDEBAR.USER_MENU')
 	const userInitials = userData.name

@@ -22,7 +22,7 @@ export function WorkspaceSwitcher({ currentWorkspace }: WorkspaceSwitcherProps) 
 
 	function handleSwitch(workspace: Workspace) {
 		if (workspace.slug !== currentWorkspace.slug) {
-			router.push(`/dashboard/${workspace.slug}`)
+			router.push(`/${workspace.slug}/dashboard`)
 		}
 	}
 

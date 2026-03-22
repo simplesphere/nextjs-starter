@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import type { LucideIcon } from 'lucide-react'
 import type { Workspace } from '@/entities/workspace'
+import type { PageHeaderProps } from '@/widgets/page-header/model/types'
 
 export interface NavItem {
 	title: string
@@ -8,7 +9,14 @@ export interface NavItem {
 	url: string
 }
 
-export type BreadcrumbIconName = 'LayoutDashboard' | 'BarChart3' | 'FolderOpen' | 'Users' | 'Settings' | 'Home'
+export type BreadcrumbIconName =
+	| 'LayoutDashboard'
+	| 'BarChart3'
+	| 'LineChart'
+	| 'FolderOpen'
+	| 'Users'
+	| 'Settings'
+	| 'Home'
 
 export interface DashboardBreadcrumb {
 	id: string
@@ -24,6 +32,7 @@ export interface DashboardHeaderProps {
 
 export interface DashboardPageWrapperProps {
 	breadcrumbs: DashboardBreadcrumb[]
+	pageHeader?: PageHeaderProps
 	children: ReactNode
 }
 

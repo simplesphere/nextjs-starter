@@ -6,7 +6,6 @@ import {
 	SidebarFooter,
 	SidebarGroup,
 	SidebarGroupContent,
-	SidebarGroupLabel,
 	SidebarHeader,
 	SidebarMenu,
 	SidebarMenuButton,
@@ -17,12 +16,12 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@share
 import { useTranslations } from 'next-intl'
 import { UserMenu } from '@/features/user-menu'
 import { WorkspaceSwitcher } from '@/features/workspace-switcher'
-import { Link } from '@/shared/config/i18n'
+import { Link, usePathname } from '@/shared/config/i18n'
 import { getSidebarNavItems } from '@/widgets/sidebar/model/config'
 import type { AppSidebarProps } from '@/widgets/sidebar/model/types'
 
 export function AppSidebar({ workspace }: AppSidebarProps) {
-	const t = useTranslations('SIDEBAR')
+	const pathname = usePathname()
 	const navT = useTranslations('SIDEBAR.NAV_ITEMS')
 
 	const navItems = getSidebarNavItems(navT, workspace.slug)
@@ -34,25 +33,28 @@ export function AppSidebar({ workspace }: AppSidebarProps) {
 			</SidebarHeader>
 			<SidebarContent>
 				<SidebarGroup>
-					<SidebarGroupLabel>{t('NAVIGATION')}</SidebarGroupLabel>
 					<SidebarGroupContent>
 						<SidebarMenu>
 							<TooltipProvider delayDuration={0}>
-								{navItems.map(item => (
-									<SidebarMenuItem key={item.title}>
-										<Tooltip>
-											<TooltipTrigger asChild>
-												<SidebarMenuButton asChild tooltip={item.title}>
-													<Link href={item.url}>
-														<item.icon className="h-4 w-4" />
-														<span>{item.title}</span>
-													</Link>
-												</SidebarMenuButton>
-											</TooltipTrigger>
-											<TooltipContent side="right">{item.title}</TooltipContent>
-										</Tooltip>
-									</SidebarMenuItem>
-								))}
+								{navItems.map(item => {
+									const isActive = pathname.endsWith(item.url) || pathname.includes(`${item.url}/`)
+
+									return (
+										<SidebarMenuItem key={item.title}>
+											<Tooltip>
+												<TooltipTrigger asChild>
+													<SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
+														<Link href={item.url} className="text-muted-foreground hover:text-foreground">
+															<item.icon className="size-4" />
+															<span>{item.title}</span>
+														</Link>
+													</SidebarMenuButton>
+												</TooltipTrigger>
+												<TooltipContent side="right">{item.title}</TooltipContent>
+											</Tooltip>
+										</SidebarMenuItem>
+									)
+								})}
 							</TooltipProvider>
 						</SidebarMenu>
 					</SidebarGroupContent>

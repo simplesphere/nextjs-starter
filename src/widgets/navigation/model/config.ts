@@ -1,3 +1,4 @@
+import { DEFAULT_WORKSPACE_SLUG } from '@/entities/workspace'
 import type { NavigationCategory, NavigationData, NavigationItem } from '@/widgets/navigation/model/types'
 
 /**
@@ -25,7 +26,7 @@ export function getNavigationData(t: (key: string) => string): NavigationData {
 		},
 		{
 			title: t('DASHBOARD.TITLE'),
-			items: [{ href: '/dashboard', label: t('DASHBOARD.HOME') }]
+			items: [{ href: `/${DEFAULT_WORKSPACE_SLUG}/dashboard`, label: t('DASHBOARD.HOME') }]
 		},
 		{
 			title: t('PRIVACY.TITLE'),

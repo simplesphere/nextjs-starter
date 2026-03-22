@@ -116,3 +116,14 @@ export interface WorkspaceMetadataProps {
 	params: Promise<WorkspaceLayoutParams>
 	searchParams?: Promise<Record<string, string | string[] | undefined>>
 }
+
+export interface StatsCardProps {
+	title: string
+	value: string | number
+	icon: ReactNode
+	tooltip?: string
+}
+
+export interface StatsCardTooltipProps {
+	content: string
+}

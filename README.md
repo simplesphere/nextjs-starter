@@ -98,8 +98,8 @@ Configured in `tsconfig.json`:
 
 The dashboard routes are workspace-scoped:
 
-- `/dashboard` → redirects to default workspace
-- `/dashboard/[workspace]` → workspace dashboard (e.g. `/dashboard/acme-corp`)
+- `/[workspace]/dashboard` → workspace overview (e.g. `/acme-corp/dashboard`)
+- `/[workspace]/analytics` → workspace analytics (e.g. `/acme-corp/analytics`)
 
 The workspace switcher in the sidebar navigates between workspaces via URL. Workspace data is resolved server-side from
 route params — no client-side context needed.
