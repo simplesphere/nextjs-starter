@@ -1,33 +1,36 @@
 'use server'
 
 import { headers } from 'next/headers'
+import { redirect } from 'next/navigation'
 import { type ForgotPasswordFormData, forgotPasswordSchema } from '@/features/auth/forgot-password/model/schema'
 import type { ForgotPasswordResult } from '@/features/auth/forgot-password/model/types'
+import { routes } from '@/shared/config/routes'
+import { logger } from '@/shared/lib/logger'
 import { rateLimit } from '@/shared/lib/rate-limit'
-import { getClientIp } from '@/shared/lib/rate-limit/get-client-ip'
+import { getRateLimitKey } from '@/shared/lib/rate-limit/get-client-ip'
 
 /**
- * Server action to handle forgot password request.
- * Sends a verification code to the user's email.
+ * Server action to handle forgot-password requests.
+ * On success the action redirects to the OTP verification page; on failure
+ * it returns a structured result for the form to surface.
  *
  * @param data - Validated forgot password form data
- * @returns Forgot password result with success status
+ * @returns Result on validation or rate-limit failure (success path redirects)
  *
  * @example
  * ```tsx
  * const result = await forgotPasswordAction(formData)
- * if (result.success) {
- *   router.push('/verify-otp')
- * } else {
- *   setError('root', { message: result.error })
- * }
+ * if (!result.success) setError('root', { message: result.error })
  * ```
  */
 export async function forgotPasswordAction(data: ForgotPasswordFormData): Promise<ForgotPasswordResult> {
 	try {
 		const headersList = await headers()
-		const ip = getClientIp(headersList)
-		const { allowed } = rateLimit(`forgot-password:${ip}`, { maxAttempts: 3, windowMs: 60_000 })
+		const ipKey = getRateLimitKey(headersList)
+		if (!ipKey) {
+			return { success: false, error: 'GENERAL' }
+		}
+		const { allowed } = rateLimit(`forgot-password:${ipKey}`, { maxAttempts: 3, windowMs: 60_000 })
 		if (!allowed) {
 			return { success: false, error: 'RATE_LIMIT' }
 		}
@@ -37,17 +40,14 @@ export async function forgotPasswordAction(data: ForgotPasswordFormData): Promis
 			return { success: false, error: 'VALIDATION' }
 		}
 
+		// TODO: replace mock delay with the real "send code" call.
 		await new Promise(resolve => setTimeout(resolve, 1000))
-
-		return {
-			success: true,
-			data: { message: 'Verification code sent to your email' }
-		}
 	} catch (error) {
-		console.error('Forgot password error:', error)
-		return {
-			success: false,
-			error: 'GENERAL'
-		}
+		logger.error('Forgot password action failed', { error })
+		return { success: false, error: 'GENERAL' }
 	}
+
+	// `redirect()` throws — must run outside the try/catch so the NEXT_REDIRECT
+	// signal is not swallowed.
+	redirect(routes.auth.verifyOtp)
 }
