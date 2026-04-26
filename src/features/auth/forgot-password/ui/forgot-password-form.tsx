@@ -3,9 +3,10 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
+import { useTransition } from 'react'
 import { forgotPasswordAction } from '@/features/auth/forgot-password/api/actions'
 import { type ForgotPasswordFormData, forgotPasswordSchema } from '@/features/auth/forgot-password/model/schema'
-import { useRouter } from '@/shared/config/i18n'
+import { useClearRootOnChange } from '@/shared/lib/forms'
 import { translateError } from '@/shared/lib/i18n'
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, FormError, FormField } from '@/shared/ui'
 
@@ -21,29 +22,32 @@ import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Form
  */
 export function ForgotPasswordForm() {
 	const t = useTranslations('AUTH.FORGOT_PASSWORD')
-	const router = useRouter()
+	const form = useForm<ForgotPasswordFormData>({
+		resolver: zodResolver(forgotPasswordSchema)
+	})
 	const {
 		register,
 		handleSubmit,
 		setError,
-		formState: { errors, isSubmitting }
-	} = useForm<ForgotPasswordFormData>({
-		resolver: zodResolver(forgotPasswordSchema)
-	})
+		formState: { errors }
+	} = form
+	const [isPending, startTransition] = useTransition()
+
+	useClearRootOnChange(form, ['email'])
 
 	/**
 	 * Handles form submission with validated email data.
+	 * Server action redirects on success — only failures land here.
 	 *
 	 * @param data - Validated forgot password form data
 	 */
-	const onSubmit = async (data: ForgotPasswordFormData) => {
-		const result = await forgotPasswordAction(data)
-
-		if (result.success) {
-			router.push('/verify-otp')
-		} else {
-			setError('root', { message: result.error })
-		}
+	const onSubmit = (data: ForgotPasswordFormData) => {
+		startTransition(async () => {
+			const result = await forgotPasswordAction(data)
+			if (result && !result.success) {
+				setError('root', { message: result.error })
+			}
+		})
 	}
 
 	return (
@@ -63,14 +67,15 @@ export function ForgotPasswordForm() {
 						inputProps={{
 							id: 'email',
 							type: 'email',
+							autoComplete: 'email',
 							placeholder: t('EMAIL_PLACEHOLDER'),
-							disabled: isSubmitting,
+							disabled: isPending,
 							...register('email')
 						}}
 					/>
 
-					<Button type="submit" className="w-full" disabled={isSubmitting}>
-						{isSubmitting ? t('SUBMIT_LOADING') : t('SUBMIT')}
+					<Button type="submit" className="w-full" disabled={isPending}>
+						{isPending ? t('SUBMIT_LOADING') : t('SUBMIT')}
 					</Button>
 				</form>
 			</CardContent>

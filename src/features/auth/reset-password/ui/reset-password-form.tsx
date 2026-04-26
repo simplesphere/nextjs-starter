@@ -3,9 +3,10 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
+import { useTransition } from 'react'
 import { resetPasswordAction } from '@/features/auth/reset-password/api/actions'
 import { type ResetPasswordFormData, resetPasswordSchema } from '@/features/auth/reset-password/model/schema'
-import { useRouter } from '@/shared/config/i18n'
+import { useClearRootOnChange } from '@/shared/lib/forms'
 import { translateError } from '@/shared/lib/i18n'
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, FormError, FormField } from '@/shared/ui'
 
@@ -21,29 +22,32 @@ import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Form
  */
 export function ResetPasswordForm() {
 	const t = useTranslations('AUTH.RESET_PASSWORD')
-	const router = useRouter()
+	const form = useForm<ResetPasswordFormData>({
+		resolver: zodResolver(resetPasswordSchema)
+	})
 	const {
 		register,
 		handleSubmit,
 		setError,
-		formState: { errors, isSubmitting }
-	} = useForm<ResetPasswordFormData>({
-		resolver: zodResolver(resetPasswordSchema)
-	})
+		formState: { errors }
+	} = form
+	const [isPending, startTransition] = useTransition()
+
+	useClearRootOnChange(form, ['password', 'confirmPassword'])
 
 	/**
 	 * Handles form submission with validated reset password data.
+	 * Server action redirects on success — only failures land here.
 	 *
 	 * @param data - Validated reset password form data
 	 */
-	const onSubmit = async (data: ResetPasswordFormData) => {
-		const result = await resetPasswordAction(data)
-
-		if (result.success) {
-			router.push('/login')
-		} else {
-			setError('root', { message: result.error })
-		}
+	const onSubmit = (data: ResetPasswordFormData) => {
+		startTransition(async () => {
+			const result = await resetPasswordAction(data)
+			if (result && !result.success) {
+				setError('root', { message: result.error })
+			}
+		})
 	}
 
 	return (
@@ -63,8 +67,9 @@ export function ResetPasswordForm() {
 						inputProps={{
 							id: 'password',
 							type: 'password',
+							autoComplete: 'new-password',
 							placeholder: t('PASSWORD_PLACEHOLDER'),
-							disabled: isSubmitting,
+							disabled: isPending,
 							...register('password')
 						}}
 					/>
@@ -76,14 +81,15 @@ export function ResetPasswordForm() {
 						inputProps={{
 							id: 'confirmPassword',
 							type: 'password',
+							autoComplete: 'new-password',
 							placeholder: t('CONFIRM_PASSWORD_PLACEHOLDER'),
-							disabled: isSubmitting,
+							disabled: isPending,
 							...register('confirmPassword')
 						}}
 					/>
 
-					<Button type="submit" className="w-full" disabled={isSubmitting}>
-						{isSubmitting ? t('SUBMIT_LOADING') : t('SUBMIT')}
+					<Button type="submit" className="w-full" disabled={isPending}>
+						{isPending ? t('SUBMIT_LOADING') : t('SUBMIT')}
 					</Button>
 				</form>
 			</CardContent>

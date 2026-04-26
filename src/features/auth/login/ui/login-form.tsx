@@ -3,9 +3,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
+import { useTransition } from 'react'
 import { loginAction } from '@/features/auth/login/api/actions'
 import { type LoginFormData, loginSchema } from '@/features/auth/login/model/schema'
 import { Link } from '@/shared/config/i18n'
+import { useClearRootOnChange } from '@/shared/lib/forms'
 import { translateError } from '@/shared/lib/i18n'
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, FormError, FormField } from '@/shared/ui'
 
@@ -21,26 +23,32 @@ import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Form
  */
 export function LoginForm() {
 	const t = useTranslations('AUTH.LOGIN')
+	const form = useForm<LoginFormData>({
+		resolver: zodResolver(loginSchema)
+	})
 	const {
 		register,
 		handleSubmit,
 		setError,
-		formState: { errors, isSubmitting }
-	} = useForm<LoginFormData>({
-		resolver: zodResolver(loginSchema)
-	})
+		formState: { errors }
+	} = form
+	const [isPending, startTransition] = useTransition()
+
+	useClearRootOnChange(form, ['email', 'password'])
 
 	/**
 	 * Handles form submission with validated login data.
+	 * Server action redirects on success — only failures land here.
 	 *
 	 * @param data - Validated login form data
 	 */
-	const onSubmit = async (data: LoginFormData) => {
-		const result = await loginAction(data)
-
-		if (!result.success) {
-			setError('root', { message: result.error })
-		}
+	const onSubmit = (data: LoginFormData) => {
+		startTransition(async () => {
+			const result = await loginAction(data)
+			if (result && !result.success) {
+				setError('root', { message: result.error })
+			}
+		})
 	}
 
 	return (
@@ -60,8 +68,9 @@ export function LoginForm() {
 						inputProps={{
 							id: 'email',
 							type: 'email',
+							autoComplete: 'email',
 							placeholder: t('EMAIL_PLACEHOLDER'),
-							disabled: isSubmitting,
+							disabled: isPending,
 							...register('email')
 						}}
 					/>
@@ -74,23 +83,24 @@ export function LoginForm() {
 							inputProps={{
 								id: 'password',
 								type: 'password',
+								autoComplete: 'current-password',
 								placeholder: t('PASSWORD_PLACEHOLDER'),
-								disabled: isSubmitting,
+								disabled: isPending,
 								...register('password')
 							}}
 						/>
 						<div className="flex justify-end">
 							<Link
 								href="/forgot-password"
-								className="text-sm font-medium text-zinc-900 underline-offset-4 hover:underline dark:text-zinc-50"
+								className="rounded-sm text-sm font-medium text-foreground underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
 							>
 								{t('FORGOT_PASSWORD')}
 							</Link>
 						</div>
 					</div>
 
-					<Button type="submit" className="w-full" disabled={isSubmitting}>
-						{isSubmitting ? t('SUBMIT_LOADING') : t('SUBMIT')}
+					<Button type="submit" className="w-full" disabled={isPending}>
+						{isPending ? t('SUBMIT_LOADING') : t('SUBMIT')}
 					</Button>
 				</form>
 			</CardContent>

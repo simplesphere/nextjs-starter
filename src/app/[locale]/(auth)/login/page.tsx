@@ -11,7 +11,7 @@ export async function generateMetadata(
 	parent: ResolvingMetadata
 ): Promise<Metadata> {
 	const { locale } = await params
-	return createPageMetadata('METADATA.LOGIN', locale, parent)
+	return createPageMetadata('METADATA.LOGIN', locale, parent, { path: '/login' })
 }
 
 /**
@@ -23,20 +23,18 @@ export default async function LoginPage() {
 	const t = await getTranslations('AUTH.LOGIN')
 
 	return (
-		<div className="flex min-h-screen items-center justify-center bg-zinc-50 px-4 dark:bg-black">
-			<div className="w-full max-w-md space-y-6">
-				<Link
-					href="/"
-					className="inline-flex items-center gap-2 text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
-				>
-					<ArrowLeft className="h-4 w-4" />
-					{t('BACK')}
-				</Link>
+		<>
+			<Link
+				href="/"
+				className="inline-flex items-center gap-2 rounded-sm text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+			>
+				<ArrowLeft className="h-4 w-4" />
+				{t('BACK')}
+			</Link>
 
-				<div className="flex justify-center">
-					<LoginForm />
-				</div>
+			<div className="flex justify-center">
+				<LoginForm />
 			</div>
-		</div>
+		</>
 	)
 }
