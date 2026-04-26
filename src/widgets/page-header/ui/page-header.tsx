@@ -2,6 +2,7 @@ import { Button } from '@shared/ui/shadcn/button'
 import { ArrowLeft } from 'lucide-react'
 import { Link } from '@/shared/config/i18n'
 import { cn } from '@/shared/lib/utils'
+import { Heading } from '@/shared/ui'
 import type { PageHeaderProps } from '@/widgets/page-header/model/types'
 
 export function PageHeader({
@@ -10,7 +11,8 @@ export function PageHeader({
 	actions,
 	className,
 	pageHeaderComponent,
-	backLink
+	backLink,
+	headingAs = 'h1'
 }: PageHeaderProps) {
 	return (
 		<header className={cn('flex w-full items-center justify-between', className)}>
@@ -25,7 +27,11 @@ export function PageHeader({
 							</Link>
 						</Button>
 					)}
-					{headline && <h1 className="mb-1 text-3xl font-bold tracking-tight">{headline}</h1>}
+					{headline && (
+						<Heading as={headingAs} size="lg" weight="bold" className="mb-1 tracking-tight">
+							{headline}
+						</Heading>
+					)}
 					{subheadline && <p className="text-muted-foreground">{subheadline}</p>}
 				</div>
 			)}

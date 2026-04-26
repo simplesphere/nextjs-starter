@@ -11,8 +11,8 @@ export async function generateMetadata(
 	{ params }: WorkspaceMetadataProps,
 	parent: ResolvingMetadata
 ): Promise<Metadata> {
-	const { locale } = await params
-	return createPageMetadata('METADATA.ANALYTICS', locale, parent)
+	const { locale, workspace } = await params
+	return createPageMetadata('METADATA.ANALYTICS', locale, parent, { path: `/${workspace}/analytics` })
 }
 
 export default async function AnalyticsPage() {

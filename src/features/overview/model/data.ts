@@ -2,6 +2,14 @@ import { createElement } from 'react'
 import { DollarSign, TrendingUp, Users, UsersRound } from 'lucide-react'
 import type { OverviewStatItem } from '@/features/overview/model/types'
 
+/**
+ * MOCK DATA — replace with real metric queries once analytics are wired up.
+ * Returning a typed array keeps the consumer signature stable so downstream
+ * components don't need to change when the data source swaps.
+ *
+ * @param t - Translation function for the `DASHBOARD.STATS` namespace
+ * @returns The list of overview stats to render in the dashboard grid
+ */
 export function getOverviewStats(t: (key: string) => string): OverviewStatItem[] {
 	return [
 		{
