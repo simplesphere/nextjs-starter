@@ -58,9 +58,18 @@ export type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 
 export type HeadingSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
 
+export type HeadingWeight = 'normal' | 'medium' | 'semibold' | 'bold'
+
+export type HeadingTracking = 'tighter' | 'tight' | 'normal' | 'wide'
+
+export type HeadingLeading = 'none' | 'tight' | 'snug' | 'normal' | 'relaxed'
+
 export interface HeadingProps {
 	as?: HeadingLevel
 	size?: HeadingSize
+	weight?: HeadingWeight
+	tracking?: HeadingTracking
+	leading?: HeadingLeading
 	uppercase?: boolean
 	className?: string
 	children: ReactNode

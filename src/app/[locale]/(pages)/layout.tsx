@@ -4,7 +4,9 @@ import { Footer } from '@/shared/ui'
 export default function PagesLayout({ children }: { children: ReactNode }) {
 	return (
 		<div className="flex min-h-screen flex-col">
-			<main className="flex-1">{children}</main>
+			<main id="content" className="flex-1">
+				{children}
+			</main>
 			<Footer />
 		</div>
 	)

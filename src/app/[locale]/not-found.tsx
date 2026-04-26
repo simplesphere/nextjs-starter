@@ -15,8 +15,8 @@ export default async function NotFound() {
 	const t = await getTranslations('NOT_FOUND')
 
 	return (
-		<div className="flex min-h-screen items-center justify-center bg-zinc-50 px-4 dark:bg-black">
-			<div className="w-full max-w-md space-y-6 text-center">
+		<div className="flex min-h-screen items-center justify-center bg-background px-4">
+			<main id="content" className="w-full max-w-md space-y-6 text-center">
 				<div className="space-y-4">
 					<Heading as="h1" size="3xl">
 						{t('TITLE')}
@@ -24,16 +24,16 @@ export default async function NotFound() {
 					<Heading as="h2" size="lg">
 						{t('HEADING')}
 					</Heading>
-					<p>{t('DESCRIPTION')}</p>
+					<p className="text-muted-foreground">{t('DESCRIPTION')}</p>
 				</div>
 				<Link
 					href="/"
-					className="inline-flex items-center justify-center gap-2 rounded-lg bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
+					className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
 				>
 					<Home className="h-4 w-4" />
 					{t('GO_HOME')}
 				</Link>
-			</div>
+			</main>
 		</div>
 	)
 }

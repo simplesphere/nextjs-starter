@@ -33,17 +33,17 @@ export function FormField({ label, error, required, inputProps }: FormFieldProps
 
 	return (
 		<div className="space-y-2">
-			<Label htmlFor={id} className={required ? "after:ml-0.5 after:text-red-500 after:content-['*']" : ''}>
+			<Label htmlFor={id} className={required ? "after:ml-0.5 after:text-destructive after:content-['*']" : ''}>
 				{label}
 			</Label>
 			<Input
 				{...inputProps}
 				aria-invalid={!!error}
 				aria-describedby={errorId}
-				className={cn(error && 'border-red-500 focus-visible:ring-red-500')}
+				className={cn(error && 'border-destructive focus-visible:ring-destructive', inputProps.className)}
 			/>
 			{error && (
-				<p id={errorId} className="text-sm text-red-600 dark:text-red-400">
+				<p id={errorId} role="alert" className="text-sm text-destructive">
 					{error}
 				</p>
 			)}

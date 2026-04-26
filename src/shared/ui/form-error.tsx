@@ -14,6 +14,12 @@ import type { FormErrorProps } from '@/shared/types'
  */
 export function FormError({ message }: FormErrorProps) {
 	return (
-		<div className="rounded-md bg-red-50 p-3 text-sm text-red-900 dark:bg-red-950 dark:text-red-200">{message}</div>
+		<div
+			role="alert"
+			aria-live="polite"
+			className="rounded-md border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive"
+		>
+			{message}
+		</div>
 	)
 }

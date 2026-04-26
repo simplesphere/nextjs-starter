@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import * as React from 'react'
+import { type ClipboardEvent, type KeyboardEvent, useRef } from 'react'
 import { cn } from '@/shared/lib/utils'
 import type { OtpInputProps } from '@/shared/types'
 import { Input } from '@/shared/ui/shadcn/input'
@@ -28,36 +28,63 @@ import { Input } from '@/shared/ui/shadcn/input'
  */
 export function OtpInput({ length = 6, value, onChange, disabled, className }: OtpInputProps) {
 	const t = useTranslations('OTP_INPUT')
-	const inputRefs = React.useRef<(HTMLInputElement | null)[]>([])
+	const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
-	const handleChange = (index: number, digit: string) => {
-		if (!/^\d*$/.test(digit)) return
+	const setDigit = (index: number, digit: string) => {
+		const chars = value.split('')
+		chars[index] = digit
+		return chars.join('').slice(0, length)
+	}
 
-		const newValue = value.split('')
-		newValue[index] = digit
-		const updatedValue = newValue.join('').slice(0, length)
-		onChange(updatedValue)
-
-		if (digit && index < length - 1) {
-			inputRefs.current[index + 1]?.focus()
+	const focusCell = (index: number) => {
+		const target = inputRefs.current[index]
+		if (target) {
+			target.focus()
+			target.select()
 		}
 	}
 
-	const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-		if (e.key === 'Backspace' && !value[index] && index > 0) {
-			inputRefs.current[index - 1]?.focus()
+	const handleChange = (index: number, raw: string) => {
+		// Take only the last typed digit so overwriting a filled cell works as expected.
+		const digit = raw.replace(/\D/g, '').slice(-1)
+		if (!digit && !value[index]) return
+
+		onChange(setDigit(index, digit))
+		if (digit && index < length - 1) focusCell(index + 1)
+	}
+
+	const handleKeyDown = (index: number, e: KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === 'Backspace') {
+			// Backspace clears the current cell if filled, otherwise clears+focuses the previous one.
+			e.preventDefault()
+			if (value[index]) {
+				onChange(setDigit(index, ''))
+			} else if (index > 0) {
+				onChange(setDigit(index - 1, ''))
+				focusCell(index - 1)
+			}
+			return
+		}
+
+		if (e.key === 'ArrowLeft' && index > 0) {
+			e.preventDefault()
+			focusCell(index - 1)
+			return
+		}
+
+		if (e.key === 'ArrowRight' && index < length - 1) {
+			e.preventDefault()
+			focusCell(index + 1)
 		}
 	}
 
-	const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+	const handlePaste = (e: ClipboardEvent<HTMLInputElement>) => {
 		e.preventDefault()
-		const pastedData = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, length)
-		onChange(pastedData)
-		if (pastedData.length === length) {
-			inputRefs.current[length - 1]?.focus()
-		} else if (pastedData.length > 0) {
-			inputRefs.current[pastedData.length]?.focus()
-		}
+		const pasted = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, length)
+		if (!pasted) return
+
+		onChange(pasted)
+		focusCell(Math.min(pasted.length, length - 1))
 	}
 
 	return (
@@ -70,11 +97,13 @@ export function OtpInput({ length = 6, value, onChange, disabled, className }: O
 					}}
 					type="text"
 					inputMode="numeric"
+					autoComplete="one-time-code"
 					maxLength={1}
-					value={value[index] || ''}
+					value={value[index] ?? ''}
 					onChange={e => handleChange(index, e.target.value)}
 					onKeyDown={e => handleKeyDown(index, e)}
 					onPaste={handlePaste}
+					onFocus={e => e.currentTarget.select()}
 					disabled={disabled}
 					className="h-12 w-12 text-center text-lg font-semibold"
 					aria-label={t('DIGIT_ARIA_LABEL', { digit: index + 1 })}

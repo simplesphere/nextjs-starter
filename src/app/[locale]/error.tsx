@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
+import { logger } from '@/shared/lib/logger'
 import type { ErrorBoundaryProps } from '@/shared/types'
 import { ErrorDisplay } from '@/shared/ui/error-display'
 
@@ -21,7 +22,7 @@ export default function Error({ error, reset }: ErrorBoundaryProps) {
 	const [copied, setCopied] = useState(false)
 
 	useEffect(() => {
-		console.error('Application error:', error)
+		logger.error('Application error boundary triggered', { digest: error.digest, message: error.message })
 	}, [error])
 
 	const copyErrorId = () => {

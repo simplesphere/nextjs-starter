@@ -5,6 +5,53 @@ import { Link } from '@/shared/config/i18n'
 import type { ErrorDisplayProps } from '@/shared/types'
 import { Button } from '@/shared/ui/shadcn/button'
 
+interface DigestPanelProps {
+	digest: string
+	errorIdLabel: string
+	copyLabel: string
+	copiedLabel: string
+	showCopyButton: boolean
+	isCopied: boolean
+	onCopy?: () => void
+}
+
+function DigestPanel({
+	digest,
+	errorIdLabel,
+	copyLabel,
+	copiedLabel,
+	showCopyButton,
+	isCopied,
+	onCopy
+}: DigestPanelProps) {
+	return (
+		<div className="flex items-center justify-between rounded-lg border border-border bg-muted px-4 py-3">
+			<div className="flex-1">
+				<p className="text-xs font-medium text-muted-foreground">{errorIdLabel}</p>
+				<p className="font-mono text-sm text-foreground">{digest}</p>
+			</div>
+			{showCopyButton && onCopy && (
+				<button
+					onClick={onCopy}
+					className="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+				>
+					{isCopied ? (
+						<>
+							<Check className="h-3.5 w-3.5" />
+							{copiedLabel}
+						</>
+					) : (
+						<>
+							<Copy className="h-3.5 w-3.5" />
+							{copyLabel}
+						</>
+					)}
+				</button>
+			)}
+		</div>
+	)
+}
+
 export function ErrorDisplay({
 	error,
 	reset,
@@ -23,6 +70,8 @@ export function ErrorDisplay({
 	showDevMessage = false,
 	devMessage
 }: ErrorDisplayProps) {
+	const showDigest = showErrorId && !!error.digest
+
 	return (
 		<div className="flex min-h-screen items-center justify-center bg-background px-4">
 			<div className="w-full max-w-md space-y-6">
@@ -38,31 +87,16 @@ export function ErrorDisplay({
 						<p className="text-sm text-destructive">{devMessage}</p>
 					</div>
 				)}
-				{showErrorId && error.digest && (
-					<div className="flex items-center justify-between rounded-lg border border-border bg-muted px-4 py-3">
-						<div className="flex-1">
-							<p className="text-xs font-medium text-muted-foreground">{errorIdLabel}</p>
-							<p className="font-mono text-sm text-foreground">{error.digest}</p>
-						</div>
-						{showCopyButton && onCopy && (
-							<button
-								onClick={onCopy}
-								className="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-							>
-								{isCopied ? (
-									<>
-										<Check className="h-3.5 w-3.5" />
-										{copiedLabel}
-									</>
-								) : (
-									<>
-										<Copy className="h-3.5 w-3.5" />
-										{copyLabel}
-									</>
-								)}
-							</button>
-						)}
-					</div>
+				{showDigest && (
+					<DigestPanel
+						digest={error.digest!}
+						errorIdLabel={errorIdLabel}
+						copyLabel={copyLabel}
+						copiedLabel={copiedLabel}
+						showCopyButton={showCopyButton}
+						isCopied={isCopied}
+						onCopy={onCopy}
+					/>
 				)}
 				<div className="flex gap-3">
 					<Button onClick={reset} className="flex-1">
