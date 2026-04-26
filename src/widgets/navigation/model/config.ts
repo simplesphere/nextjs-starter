@@ -1,8 +1,13 @@
-import { DEFAULT_WORKSPACE_SLUG } from '@/entities/workspace'
+import { routes } from '@/shared/config/routes'
 import type { NavigationCategory, NavigationData, NavigationItem } from '@/widgets/navigation/model/types'
 
 /**
  * Generates navigation data structure with categories and standalone pages.
+ *
+ * NOTE: Auth links are intentionally absent from public marketing navigation
+ * — entry into the auth flow is via the dedicated "Sign in" CTA in the app
+ * shell, not via a public dropdown. Add additional categories here as your
+ * product grows.
  *
  * @param t - Translation function for navigation keys
  * @returns Navigation data with categories and standalone pages
@@ -16,30 +21,22 @@ import type { NavigationCategory, NavigationData, NavigationItem } from '@/widge
 export function getNavigationData(t: (key: string) => string): NavigationData {
 	const categories: NavigationCategory[] = [
 		{
-			title: t('AUTH.TITLE'),
-			items: [
-				{ href: '/login', label: t('AUTH.LOGIN') },
-				{ href: '/reset-password', label: t('AUTH.RESET_PASSWORD') },
-				{ href: '/verify-otp', label: t('AUTH.VERIFY_OTP') },
-				{ href: '/forgot-password', label: t('AUTH.FORGOT_PASSWORD') }
-			]
-		},
-		{
 			title: t('DASHBOARD.TITLE'),
-			items: [{ href: `/${DEFAULT_WORKSPACE_SLUG}/dashboard`, label: t('DASHBOARD.HOME') }]
+			items: [{ href: routes.dashboard.root, label: t('DASHBOARD.HOME') }]
 		},
 		{
-			title: t('PRIVACY.TITLE'),
+			title: t('LEGAL.TITLE'),
 			items: [
-				{ href: '/privacy', label: t('PRIVACY.PRIVACY_POLICY') },
-				{ href: '/terms', label: t('PRIVACY.TERMS_OF_SERVICE') }
+				{ href: routes.privacy, label: t('LEGAL.PRIVACY_POLICY') },
+				{ href: routes.terms, label: t('LEGAL.TERMS_OF_SERVICE') }
 			]
 		}
 	]
 
 	const standalonePages: NavigationItem[] = [
-		{ href: '/', label: t('HOME') },
-		{ href: '/about', label: t('ABOUT') }
+		{ href: routes.home, label: t('HOME') },
+		{ href: routes.about, label: t('ABOUT') },
+		{ href: routes.auth.login, label: t('LOGIN') }
 	]
 
 	return { categories, standalonePages }

@@ -13,6 +13,7 @@ import {
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@shared/ui/shadcn/sidebar'
 import { useTranslations } from 'next-intl'
 import { ChevronsUpDown, CreditCard, LogOut, Settings, User } from 'lucide-react'
+import { logoutAction } from '@/features/auth'
 import { userData } from '@/entities/user'
 
 /** Sidebar user menu with profile, billing, settings, and logout options. */
@@ -78,9 +79,13 @@ export function UserMenu() {
 							</DropdownMenuItem>
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem className="cursor-pointer">
-							<LogOut className="mr-2 h-4 w-4" />
-							{t('LOG_OUT')}
+						<DropdownMenuItem asChild className="cursor-pointer">
+							<form action={logoutAction}>
+								<button type="submit" className="flex w-full items-center">
+									<LogOut className="mr-2 h-4 w-4" />
+									{t('LOG_OUT')}
+								</button>
+							</form>
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

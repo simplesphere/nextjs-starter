@@ -12,7 +12,6 @@ import {
 	SidebarMenuItem,
 	SidebarRail
 } from '@shared/ui/shadcn/sidebar'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@shared/ui/shadcn/tooltip'
 import { useTranslations } from 'next-intl'
 import { UserMenu } from '@/features/user-menu'
 import { WorkspaceSwitcher } from '@/features/workspace-switcher'
@@ -35,27 +34,21 @@ export function AppSidebar({ workspace }: AppSidebarProps) {
 				<SidebarGroup>
 					<SidebarGroupContent>
 						<SidebarMenu>
-							<TooltipProvider delayDuration={0}>
-								{navItems.map(item => {
-									const isActive = pathname.endsWith(item.url) || pathname.includes(`${item.url}/`)
+							{navItems.map(item => {
+								// Match the exact route or any nested child of it; avoid substring false matches.
+								const isActive = pathname === item.url || pathname.startsWith(`${item.url}/`)
 
-									return (
-										<SidebarMenuItem key={item.title}>
-											<Tooltip>
-												<TooltipTrigger asChild>
-													<SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
-														<Link href={item.url} className="text-muted-foreground hover:text-foreground">
-															<item.icon className="size-4" />
-															<span>{item.title}</span>
-														</Link>
-													</SidebarMenuButton>
-												</TooltipTrigger>
-												<TooltipContent side="right">{item.title}</TooltipContent>
-											</Tooltip>
-										</SidebarMenuItem>
-									)
-								})}
-							</TooltipProvider>
+								return (
+									<SidebarMenuItem key={item.title}>
+										<SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
+											<Link href={item.url} className="text-muted-foreground hover:text-foreground">
+												<item.icon className="size-4" />
+												<span>{item.title}</span>
+											</Link>
+										</SidebarMenuButton>
+									</SidebarMenuItem>
+								)
+							})}
 						</SidebarMenu>
 					</SidebarGroupContent>
 				</SidebarGroup>

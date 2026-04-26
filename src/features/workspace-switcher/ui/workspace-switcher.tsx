@@ -58,11 +58,14 @@ export function WorkspaceSwitcher({ currentWorkspace }: WorkspaceSwitcherProps) 
 							</DropdownMenuItem>
 						))}
 						<DropdownMenuSeparator />
-						<DropdownMenuItem className="cursor-pointer gap-2">
+						<DropdownMenuItem disabled className="gap-2">
 							<div className="flex size-6 items-center justify-center rounded-sm border border-sidebar-border">
 								<Plus className="size-3" />
 							</div>
-							<div className="font-medium">{t('ADD_WORKSPACE')}</div>
+							<div className="flex flex-1 flex-col">
+								<span className="font-medium">{t('ADD_WORKSPACE')}</span>
+								<span className="text-xs text-muted-foreground">{t('ADD_WORKSPACE_COMING_SOON')}</span>
+							</div>
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
