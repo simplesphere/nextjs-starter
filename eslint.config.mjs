@@ -39,9 +39,9 @@ const eslintConfig = [
 			curly: 'error',
 			'dot-notation': 'error',
 			'no-else-return': 'error',
-			complexity: ['warn', 25],
+			complexity: ['warn', 12],
 			'max-depth': ['warn', 4],
-			'max-lines': ['warn', { max: 400, skipBlankLines: true, skipComments: true }],
+			'max-lines': ['warn', { max: 250, skipBlankLines: true, skipComments: true }],
 			'no-restricted-imports': [
 				'error',
 				{

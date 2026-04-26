@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main, develop]
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   quality:
     name: Code Quality
@@ -47,7 +51,7 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Run tests
-        run: bun run test
+        run: bun run test --run
 
   build:
     name: Build
@@ -68,4 +72,8 @@ jobs:
       - name: Build application
         run: bun run build
         env:
-          ANALYZE: false
+          ANALYZE: 'false'
+          # Provided so the validated env (src/shared/config/env.ts) doesn't
+          # fail-closed during a CI build. Real deploys should set this to
+          # the actual production URL.
+          NEXT_PUBLIC_SITE_URL: https://example.com
