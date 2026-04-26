@@ -4,8 +4,10 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { googleSansFlex } from '@/shared/config/fonts'
 import { routing } from '@/shared/config/i18n'
+import { siteUrl } from '@/shared/config/site'
 import { ThemeProvider } from '@/shared/providers/theme-provider'
 import type { GenerateMetadataProps, LocaleLayoutProps } from '@/shared/types'
+import { SkipLink } from '@/shared/ui'
 
 export function generateStaticParams() {
 	return routing.locales.map(locale => ({ locale }))
@@ -16,7 +18,7 @@ export async function generateMetadata({ params }: GenerateMetadataProps): Promi
 	const t = await getTranslations({ locale, namespace: 'METADATA' })
 
 	return {
-		metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+		metadataBase: new URL(siteUrl),
 		title: {
 			template: `%s | ${t('SITE_NAME')}`,
 			default: t('TITLE')
@@ -25,19 +27,12 @@ export async function generateMetadata({ params }: GenerateMetadataProps): Promi
 		openGraph: {
 			type: 'website',
 			locale,
-			images: [
-				{
-					url: '/placeholder.svg',
-					width: 1200,
-					height: 630,
-					alt: t('TITLE')
-				}
-			],
 			siteName: t('SITE_NAME')
+			// `images` left unset so Next.js auto-injects `app/opengraph-image.tsx`.
+			// Override per-route by adding a route-segment `opengraph-image.tsx`.
 		},
 		twitter: {
-			card: 'summary_large_image',
-			images: ['/placeholder.svg']
+			card: 'summary_large_image'
 		}
 	}
 }
@@ -57,7 +52,10 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 		<html lang={locale} className={googleSansFlex.variable} suppressHydrationWarning>
 			<body className="antialiased">
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-					<NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+					<NextIntlClientProvider messages={messages}>
+						<SkipLink />
+						{children}
+					</NextIntlClientProvider>
 				</ThemeProvider>
 			</body>
 		</html>

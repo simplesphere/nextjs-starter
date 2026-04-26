@@ -12,7 +12,7 @@ export async function generateMetadata(
 	parent: ResolvingMetadata
 ): Promise<Metadata> {
 	const { locale } = await params
-	return createPageMetadata('METADATA.HOME', locale, parent)
+	return createPageMetadata('METADATA.HOME', locale, parent, { path: '/' })
 }
 
 /**
@@ -31,7 +31,7 @@ export default async function Home() {
 					<Navigation />
 				</div>
 			</header>
-			<main className="flex-1">
+			<main id="content" className="flex-1">
 				<div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
 					<div className="text-center">
 						<Heading as="h1" size="xl" className="tracking-tight sm:text-6xl">

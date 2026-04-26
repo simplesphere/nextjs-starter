@@ -13,7 +13,7 @@ export async function generateMetadata(
 	parent: ResolvingMetadata
 ): Promise<Metadata> {
 	const { locale } = await params
-	return createPageMetadata('METADATA.PRIVACY', locale, parent)
+	return createPageMetadata('METADATA.PRIVACY', locale, parent, { path: '/privacy' })
 }
 
 export default async function PrivacyPage() {

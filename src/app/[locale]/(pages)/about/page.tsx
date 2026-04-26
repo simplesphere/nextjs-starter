@@ -13,7 +13,7 @@ export async function generateMetadata(
 	parent: ResolvingMetadata
 ): Promise<Metadata> {
 	const { locale } = await params
-	return createPageMetadata('METADATA.ABOUT', locale, parent)
+	return createPageMetadata('METADATA.ABOUT', locale, parent, { path: '/about' })
 }
 
 export default async function AboutPage() {
