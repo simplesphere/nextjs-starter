@@ -3,7 +3,7 @@ import { DEFAULT_WORKSPACE_SLUG } from '@/entities/workspace'
 /**
  * Centralized route paths used across the app. Forms, server actions,
  * navigation widgets, and middleware should consume these instead of
- * inlining string literals — renames become one-file changes.
+ * inlining string literals - renames become one-file changes.
  *
  * All paths are relative to the locale prefix; pass them to next-intl's
  * `Link` / `useRouter` / `redirect` directly.
@@ -25,6 +25,7 @@ export const routes = {
 		projects: (workspace: string) => `/${workspace}/projects`,
 		team: (workspace: string) => `/${workspace}/team`,
 		settings: (workspace: string) => `/${workspace}/settings`,
+		billing: (workspace: string) => `/${workspace}/billing`,
 		dashboard: (workspace: string) => `/${workspace}/dashboard`
 	}
 } as const

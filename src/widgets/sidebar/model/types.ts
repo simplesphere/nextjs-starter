@@ -16,6 +16,7 @@ export type BreadcrumbIconName =
 	| 'FolderOpen'
 	| 'Users'
 	| 'Settings'
+	| 'CreditCard'
 	| 'Home'
 
 export interface DashboardBreadcrumb {

@@ -7,7 +7,7 @@ import {
 	BreadcrumbSeparator
 } from '@shared/ui/shadcn/breadcrumb'
 import { type ComponentType, Fragment } from 'react'
-import { BarChart3, FolderOpen, Home, LayoutDashboard, LineChart, Settings, Users } from 'lucide-react'
+import { BarChart3, CreditCard, FolderOpen, Home, LayoutDashboard, LineChart, Settings, Users } from 'lucide-react'
 import { Link } from '@/shared/config/i18n'
 import type { BreadcrumbIconName, DashboardHeaderProps } from '@/widgets/sidebar/model/types'
 
@@ -18,6 +18,7 @@ const iconMap: Record<BreadcrumbIconName, ComponentType<{ className?: string }>>
 	FolderOpen,
 	Users,
 	Settings,
+	CreditCard,
 	Home
 }
 

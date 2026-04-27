@@ -1,4 +1,40 @@
 {
+	"WIDGETS": {
+		"DATA_TABLE": {
+			"SEARCH": "Search...",
+			"FILTER": "Filter",
+			"COLUMNS": "Columns",
+			"NO_RESULTS": "No results found",
+			"NO_RESULTS_FOUND": "No results found",
+			"ROWS_PER_PAGE": "Rows per page",
+			"PAGE": "Page",
+			"OF": "of",
+			"ROW_SELECTED": "row selected",
+			"ROWS_SELECTED": "rows selected",
+			"SELECT_ALL": "Select all",
+			"SELECT_ROW": "Select row",
+			"CLEAR_ALL": "Clear all",
+			"REMOVE_FILTERS": "Remove filters",
+			"ACTIVE_FILTERS": "Active filters",
+			"ACTIONS": {
+				"OPEN_MENU": "Open menu",
+				"EDIT": "Edit",
+				"DELETE": "Delete"
+			},
+			"DROPDOWN": {
+				"CANCEL_SELECTION": "Cancel selection",
+				"SELECT_RECORDS": "Select records"
+			},
+			"PAGINATION": {
+				"PAGE": "Page",
+				"OF": "of",
+				"GO_TO_FIRST_PAGE": "Go to first page",
+				"GO_TO_PREVIOUS_PAGE": "Go to previous page",
+				"GO_TO_NEXT_PAGE": "Go to next page",
+				"GO_TO_LAST_PAGE": "Go to last page"
+			}
+		}
+	},
 	"METADATA": {
 		"TITLE": "Next.js Starter",
 		"SITE_NAME": "Next.js Starter",
@@ -30,6 +66,10 @@
 		"SETTINGS": {
 			"TITLE": "Settings - Next.js Starter",
 			"DESCRIPTION": "Configure workspace preferences, integrations, and billing."
+		},
+		"BILLING": {
+			"TITLE": "Billing - Next.js Starter",
+			"DESCRIPTION": "Review your plan, usage, payment method, and invoice history."
 		},
 		"LOGIN": {
 			"TITLE": "Sign in - Next.js Starter",
@@ -333,6 +373,69 @@
 		"DESCRIPTION": "Configure workspace preferences, integrations, and billing.",
 		"EMPTY_TITLE": "Settings coming soon",
 		"EMPTY_DESCRIPTION": "Workspace-level settings will live here once features are wired up."
+	},
+	"BILLING": {
+		"TITLE": "Billing",
+		"DESCRIPTION": "Review your plan, usage, payment method, and invoice history.",
+		"PLAN": {
+			"TITLE": "Current plan",
+			"SUBTITLE": "Manage your subscription and billing cycle.",
+			"MANAGE": "Manage plan",
+			"RENEWS_ON": "Renews on {date}",
+			"PERIOD": {
+				"MONTHLY": "/ month",
+				"YEARLY": "/ year"
+			}
+		},
+		"PAYMENT_METHOD": {
+			"TITLE": "Payment method",
+			"SUBTITLE": "Used for upcoming charges and renewals.",
+			"UPDATE": "Update",
+			"EXPIRES": "Expires {month}/{year}",
+			"BRAND": {
+				"VISA": "Visa",
+				"MASTERCARD": "Mastercard",
+				"AMEX": "American Express"
+			}
+		},
+		"USAGE": {
+			"METRICS": {
+				"MEMBERS": "Team members",
+				"PROJECTS": "Projects",
+				"STORAGE": "Storage"
+			}
+		},
+		"INVOICES": {
+			"TITLE": "Invoice history",
+			"SUBTITLE": "Download receipts for your records.",
+			"SEARCH_PLACEHOLDER": "Search invoices...",
+			"NO_RESULTS": "No invoices match your search.",
+			"FILTERS": {
+				"STATUS": "Status",
+				"CLEAR": "Clear filters"
+			},
+			"HEADERS": {
+				"NUMBER": "Invoice",
+				"DATE": "Date",
+				"DESCRIPTION": "Description",
+				"AMOUNT": "Amount",
+				"STATUS": "Status",
+				"DOWNLOAD": "Download"
+			},
+			"STATUS": {
+				"PAID": "Paid",
+				"PENDING": "Pending",
+				"FAILED": "Failed"
+			},
+			"DOWNLOAD_ARIA": "Download invoice {number}",
+			"PAGINATION": {
+				"RANGE": "Showing {start}-{end} of {total}",
+				"EMPTY": "No invoices to show.",
+				"PAGE_OF": "Page {page} of {total}",
+				"PREVIOUS": "Previous",
+				"NEXT": "Next"
+			}
+		}
 	},
 	"ANALYTICS": {
 		"TITLE": "Analytics",
