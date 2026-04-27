@@ -1,36 +1,10 @@
 version: 2
 updates:
-  - package-ecosystem: 'npm'
-    directory: '/'
-    schedule:
-      interval: 'weekly'
-      day: 'monday'
-    open-pull-requests-limit: 10
-    groups:
-      next:
-        patterns:
-          - 'next'
-          - '@next/*'
-          - 'eslint-config-next'
-      react:
-        patterns:
-          - 'react'
-          - 'react-dom'
-          - '@types/react*'
-      radix:
-        patterns:
-          - '@radix-ui/*'
-      tooling:
-        patterns:
-          - 'eslint*'
-          - 'prettier*'
-          - 'typescript'
-          - 'vitest*'
-          - '@vitest/*'
-          - '@testing-library/*'
-    commit-message:
-      prefix: 'chore(deps)'
-
+  # NOTE: npm ecosystem is intentionally NOT enabled. Dependabot does not yet
+  # update `bun.lock` (see dependabot/dependabot-core#6528), so its npm PRs
+  # leave package.json and the lockfile out of sync and CI fails on
+  # `bun install --frozen-lockfile`. Use Renovate (bun-aware) if you want
+  # automated npm bumps; this config keeps GitHub Actions on autopilot only.
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
