@@ -1,0 +1,46 @@
+{
+	"WIDGETS": {
+		"DATA_TABLE": {
+			"SEARCH": "Search...",
+			"FILTER": "Filter",
+			"COLUMNS": "Columns",
+			"NO_RESULTS": "No results found",
+			"ROWS_PER_PAGE": "Rows per page",
+			"PAGE": "Page",
+			"OF": "of",
+			"ROW_SELECTED": "row selected",
+			"ROWS_SELECTED": "rows selected",
+			"SELECT_ALL": "Select all",
+			"SELECT_ROW": "Select row",
+			"ACTIONS": {
+				"OPEN_MENU": "Open menu",
+				"EDIT": "Edit",
+				"DELETE": "Delete"
+			},
+			"DROPDOWN": {
+				"CANCEL_SELECTION": "Cancel selection",
+				"SELECT_RECORDS": "Select records",
+				"EXPORT_ALL_RECORDS": "Export all records",
+				"REFRESH_DATA": "Refresh data",
+				"SAVE_VIEW": "Save view",
+				"MANAGE_VIEWS": "Manage views"
+			},
+			"NO_RESULTS_FOUND": "No results found",
+			"CLEAR_ALL": "Clear all",
+			"REMOVE_FILTERS": "Remove filters",
+			"ACTIVE_FILTERS": "Active filters",
+			"PAGINATION": {
+				"PAGE": "Page",
+				"OF": "of",
+				"GO_TO_FIRST_PAGE": "Go to first page",
+				"GO_TO_PREVIOUS_PAGE": "Go to previous page",
+				"GO_TO_NEXT_PAGE": "Go to next page",
+				"GO_TO_LAST_PAGE": "Go to last page"
+			},
+			"STATUS": {
+				"ACTIVE": "Active",
+				"INACTIVE": "Inactive"
+			}
+		}
+	}
+}
