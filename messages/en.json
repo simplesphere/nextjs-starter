@@ -272,11 +272,6 @@
 	},
 	"SIDEBAR": {
 		"NAVIGATION": "Navigation",
-		"PLANS": {
-			"ENTERPRISE": "Enterprise",
-			"PRO": "Pro",
-			"FREE": "Free"
-		},
 		"NAV_ITEMS": {
 			"OVERVIEW": "Overview",
 			"DASHBOARD": "Dashboard",
@@ -288,7 +283,31 @@
 		"WORKSPACE_SWITCHER": {
 			"WORKSPACES": "Workspaces",
 			"ADD_WORKSPACE": "Add workspace",
-			"ADD_WORKSPACE_COMING_SOON": "Coming soon"
+			"DIALOG": {
+				"TITLE": "Create your workspace",
+				"DESCRIPTION": "Set up a shared space to manage your projects with your team.",
+				"LEARN_MORE": "Learn more.",
+				"NAME_LABEL": "Workspace name",
+				"NAME_PLACEHOLDER": "Acme Corp",
+				"SLUG_LABEL": "Workspace slug",
+				"SLUG_HINT": "You can change this later in your workspace settings.",
+				"LOGO_LABEL": "Workspace logo",
+				"AVATAR_UPLOAD": "Upload image",
+				"AVATAR_CHANGE": "Change image",
+				"AVATAR_HINT": "Recommended size: 160x160px. PNG, JPG, or SVG. Max 2 MB.",
+				"SUBMIT": "Create workspace",
+				"SUBMIT_LOADING": "Creating...",
+				"ERRORS": {
+					"NAME_REQUIRED": "Workspace name is required",
+					"NAME_TOO_LONG": "Workspace name must be 50 characters or fewer",
+					"SLUG_TOO_SHORT": "Slug must be at least 2 characters",
+					"SLUG_TOO_LONG": "Slug must be 40 characters or fewer",
+					"SLUG_INVALID": "Use lowercase letters, numbers, and dashes only",
+					"AVATAR_TOO_LARGE": "Image must be 2 MB or smaller",
+					"AVATAR_INVALID_TYPE": "Image must be PNG, JPG, SVG, or WebP",
+					"GENERAL": "An error occurred. Please try again."
+				}
+			}
 		},
 		"USER_MENU": {
 			"PROFILE": "Profile",

@@ -7,21 +7,9 @@ import type { Workspace } from '@/entities/workspace/model/types'
  * this list; remove that call when these become dynamic.
  */
 export const workspaceData: Workspace[] = [
-	{
-		name: 'Acme Corp',
-		slug: 'acme-corp',
-		plan: 'ENTERPRISE'
-	},
-	{
-		name: 'Startup Inc',
-		slug: 'startup-inc',
-		plan: 'PRO'
-	},
-	{
-		name: 'Personal',
-		slug: 'personal',
-		plan: 'FREE'
-	}
+	{ name: 'Acme Corp', slug: 'acme-corp' },
+	{ name: 'Startup Inc', slug: 'startup-inc' },
+	{ name: 'Personal', slug: 'personal' }
 ]
 
 /**

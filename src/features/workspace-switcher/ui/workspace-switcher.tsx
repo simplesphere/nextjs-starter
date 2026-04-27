@@ -1,5 +1,6 @@
 'use client'
 
+import { DialogTrigger } from '@shared/ui/shadcn/dialog'
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -10,15 +11,30 @@ import {
 } from '@shared/ui/shadcn/dropdown-menu'
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@shared/ui/shadcn/sidebar'
 import { useTranslations } from 'next-intl'
-import { Building2, Check, ChevronDown, Plus } from 'lucide-react'
+import { useState } from 'react'
+import { Check, ChevronDown, Plus } from 'lucide-react'
 import type { WorkspaceSwitcherProps } from '@/features/workspace-switcher/model/types'
+import { CreateWorkspaceDialog } from '@/features/workspace-switcher/ui/create-workspace-dialog'
 import { useRouter } from '@/shared/config/i18n'
 import { type Workspace, workspaceData } from '@/entities/workspace'
 
+/**
+ * Returns up to two uppercase initials derived from a workspace name so the
+ * avatar tile reads as distinct per workspace (e.g. "Acme Corp" → "AC",
+ * "Personal" → "P"). Falls back to "?" when the name is empty.
+ */
+function getWorkspaceInitials(name: string): string {
+	const words = name.trim().split(/\s+/).filter(Boolean)
+	if (words.length === 0) return '?'
+	if (words.length === 1) return words[0]!.charAt(0).toUpperCase()
+	return (words[0]!.charAt(0) + words[words.length - 1]!.charAt(0)).toUpperCase()
+}
+
 export function WorkspaceSwitcher({ currentWorkspace }: WorkspaceSwitcherProps) {
 	const t = useTranslations('SIDEBAR.WORKSPACE_SWITCHER')
-	const plansT = useTranslations('SIDEBAR.PLANS')
 	const router = useRouter()
+
+	const [createOpen, setCreateOpen] = useState(false)
 
 	function handleSwitch(workspace: Workspace) {
 		if (workspace.slug !== currentWorkspace.slug) {
@@ -29,46 +45,59 @@ export function WorkspaceSwitcher({ currentWorkspace }: WorkspaceSwitcherProps) 
 	return (
 		<SidebarMenu>
 			<SidebarMenuItem>
-				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<SidebarMenuButton className="h-8 data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
-							<div className="flex size-6 items-center justify-center rounded-sm bg-sidebar-primary text-sidebar-primary-foreground">
-								<Building2 className="size-3.5" />
-							</div>
-							<span className="truncate font-semibold">{currentWorkspace.name}</span>
-							<ChevronDown className="ml-auto size-3.5 opacity-50" />
-						</SidebarMenuButton>
-					</DropdownMenuTrigger>
-					<DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width)" align="start">
-						<DropdownMenuLabel>{t('WORKSPACES')}</DropdownMenuLabel>
-						{workspaceData.map(workspace => (
-							<DropdownMenuItem
-								key={workspace.slug}
-								onClick={() => handleSwitch(workspace)}
-								className="cursor-pointer gap-2"
-							>
-								<div className="flex size-6 items-center justify-center rounded-sm bg-sidebar-primary text-sidebar-primary-foreground">
-									<Building2 className="size-3" />
-								</div>
-								<div className="flex flex-1 flex-col">
-									<div className="font-medium">{workspace.name}</div>
-									<div className="text-xs text-muted-foreground">{plansT(workspace.plan)}</div>
-								</div>
-								{currentWorkspace.slug === workspace.slug && <Check className="size-4" />}
-							</DropdownMenuItem>
-						))}
-						<DropdownMenuSeparator />
-						<DropdownMenuItem disabled className="gap-2">
-							<div className="flex size-6 items-center justify-center rounded-sm border border-sidebar-border">
-								<Plus className="size-3" />
-							</div>
-							<div className="flex flex-1 flex-col">
-								<span className="font-medium">{t('ADD_WORKSPACE')}</span>
-								<span className="text-xs text-muted-foreground">{t('ADD_WORKSPACE_COMING_SOON')}</span>
-							</div>
-						</DropdownMenuItem>
-					</DropdownMenuContent>
-				</DropdownMenu>
+				<CreateWorkspaceDialog
+					open={createOpen}
+					onOpenChange={setCreateOpen}
+					trigger={
+						<DropdownMenu>
+							<DropdownMenuTrigger asChild>
+								<SidebarMenuButton className="h-8 data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
+									<div
+										aria-hidden
+										className="flex size-6 items-center justify-center rounded-sm bg-sidebar-primary text-[10px] font-semibold text-sidebar-primary-foreground"
+									>
+										{getWorkspaceInitials(currentWorkspace.name)}
+									</div>
+									<span className="truncate text-sm font-semibold">{currentWorkspace.name}</span>
+									<ChevronDown className="ml-auto size-3.5 opacity-50" />
+								</SidebarMenuButton>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width) text-sm" align="start">
+								<DropdownMenuLabel className="text-xs font-normal text-muted-foreground">
+									{t('WORKSPACES')}
+								</DropdownMenuLabel>
+								{workspaceData.map(workspace => {
+									const isActive = currentWorkspace.slug === workspace.slug
+									return (
+										<DropdownMenuItem
+											key={workspace.slug}
+											onClick={() => handleSwitch(workspace)}
+											className="cursor-pointer gap-2"
+										>
+											<div
+												aria-hidden
+												className="flex size-6 items-center justify-center rounded-sm bg-sidebar-primary text-[10px] font-semibold text-sidebar-primary-foreground"
+											>
+												{getWorkspaceInitials(workspace.name)}
+											</div>
+											<span className="flex-1 truncate font-normal">{workspace.name}</span>
+											{isActive && <Check className="size-4 text-muted-foreground" />}
+										</DropdownMenuItem>
+									)
+								})}
+								<DropdownMenuSeparator />
+								<DialogTrigger asChild>
+									<DropdownMenuItem onSelect={() => setCreateOpen(true)} className="cursor-pointer gap-2">
+										<div className="flex size-6 items-center justify-center rounded-sm border border-sidebar-border text-muted-foreground">
+											<Plus className="size-3" />
+										</div>
+										<span className="flex-1 truncate font-normal">{t('ADD_WORKSPACE')}</span>
+									</DropdownMenuItem>
+								</DialogTrigger>
+							</DropdownMenuContent>
+						</DropdownMenu>
+					}
+				/>
 			</SidebarMenuItem>
 		</SidebarMenu>
 	)
