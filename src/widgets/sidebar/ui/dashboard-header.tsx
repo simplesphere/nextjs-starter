@@ -40,15 +40,17 @@ export function DashboardHeader({ breadcrumbs }: DashboardHeaderProps) {
 											{item.title}
 										</BreadcrumbPage>
 									) : (
-										<BreadcrumbLink asChild>
-											<Link
-												href={item.url ?? '#'}
-												className="flex items-center gap-1.5"
-												data-testid={item['data-testid']}
-											>
-												{Icon && <Icon className="size-3.5" />}
-												{item.title}
-											</Link>
+										<BreadcrumbLink
+											render={
+												<Link
+													href={item.url ?? '#'}
+													className="flex items-center gap-1.5"
+													data-testid={item['data-testid']}
+												/>
+											}
+										>
+											{Icon && <Icon className="size-3.5" />}
+											{item.title}
 										</BreadcrumbLink>
 									)}
 								</BreadcrumbItem>

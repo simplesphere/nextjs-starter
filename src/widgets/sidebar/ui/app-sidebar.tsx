@@ -40,11 +40,13 @@ export function AppSidebar({ workspace }: AppSidebarProps) {
 
 								return (
 									<SidebarMenuItem key={item.title}>
-										<SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
-											<Link href={item.url} className="text-muted-foreground hover:text-foreground">
-												<item.icon className="size-4" />
-												<span>{item.title}</span>
-											</Link>
+										<SidebarMenuButton
+											isActive={isActive}
+											tooltip={item.title}
+											render={<Link href={item.url} className="text-muted-foreground hover:text-foreground" />}
+										>
+											<item.icon className="size-4" />
+											<span>{item.title}</span>
 										</SidebarMenuButton>
 									</SidebarMenuItem>
 								)

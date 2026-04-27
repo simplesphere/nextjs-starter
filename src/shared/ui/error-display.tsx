@@ -103,8 +103,8 @@ export function ErrorDisplay({
 						{tryAgainLabel}
 					</Button>
 					{showGoHome && (
-						<Button variant="outline" className="flex-1" asChild>
-							<Link href="/">{goHomeLabel}</Link>
+						<Button variant="outline" className="flex-1" render={<Link href="/" />}>
+							{goHomeLabel}
 						</Button>
 					)}
 				</div>

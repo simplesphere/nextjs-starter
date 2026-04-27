@@ -32,20 +32,22 @@ export function Navigation() {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<button
-					type="button"
-					className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-					aria-label={t('PAGES')}
-				>
-					{t('PAGES')}
-					<ChevronDown className="h-4 w-4" aria-hidden="true" />
-				</button>
+			<DropdownMenuTrigger
+				render={
+					<button
+						type="button"
+						className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+						aria-label={t('PAGES')}
+					/>
+				}
+			>
+				{t('PAGES')}
+				<ChevronDown className="h-4 w-4" aria-hidden="true" />
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end" className="min-w-[200px]">
 				{standalonePages.map(page => (
-					<DropdownMenuItem key={page.href} asChild>
-						<Link href={page.href}>{page.label}</Link>
+					<DropdownMenuItem key={page.href} render={<Link href={page.href} />}>
+						{page.label}
 					</DropdownMenuItem>
 				))}
 				{categories.map(category => (
@@ -53,8 +55,8 @@ export function Navigation() {
 						<DropdownMenuSubTrigger>{category.title}</DropdownMenuSubTrigger>
 						<DropdownMenuSubContent>
 							{category.items.map(item => (
-								<DropdownMenuItem key={item.href} asChild>
-									<Link href={item.href}>{item.label}</Link>
+								<DropdownMenuItem key={item.href} render={<Link href={item.href} />}>
+									{item.label}
 								</DropdownMenuItem>
 							))}
 						</DropdownMenuSubContent>

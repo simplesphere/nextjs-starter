@@ -71,11 +71,9 @@ export function DataTableSimpleToolbar<TData>({
 					) : null}
 				</Button>
 				<DropdownMenu modal={false}>
-					<DropdownMenuTrigger asChild>
-						<Button variant="outline" size="sm" className="h-8">
-							<ColumnsIcon className="h-4 w-4" />
-							{columnsLabel}
-						</Button>
+					<DropdownMenuTrigger render={<Button variant="outline" size="sm" className="h-8" />}>
+						<ColumnsIcon className="h-4 w-4" />
+						{columnsLabel}
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end" className="min-w-[180px] p-2">
 						{table

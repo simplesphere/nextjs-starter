@@ -21,10 +21,13 @@ export function PageHeader({
 			) : (
 				<div>
 					{backLink && (
-						<Button asChild variant="outline" size="icon" className="mb-3">
-							<Link href={backLink} className="flex items-center">
-								<ArrowLeft />
-							</Link>
+						<Button
+							variant="outline"
+							size="icon"
+							className="mb-3"
+							render={<Link href={backLink} className="flex items-center" />}
+						>
+							<ArrowLeft />
 						</Button>
 					)}
 					{headline && (

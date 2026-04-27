@@ -9,6 +9,7 @@ import {
 	DropdownMenu,
 	DropdownMenuCheckboxItem,
 	DropdownMenuContent,
+	DropdownMenuGroup,
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
@@ -106,20 +107,18 @@ export function DataTableToolbar<TData>({
 			<div className="flex items-center gap-2">
 				{config?.filterableColumns && config.filterableColumns.length > 0 && (
 					<DropdownMenu modal={false}>
-						<DropdownMenuTrigger asChild>
-							<Button variant="outline" size="sm" className="h-8 gap-1.5">
-								<SlidersHorizontal className="size-3.5" />
-								{labels.filter}
-								{activeFilters.length > 0 && (
-									<Badge variant="secondary" className="ml-1 rounded-full px-1">
-										{activeFilters.length}
-									</Badge>
-								)}
-							</Button>
+						<DropdownMenuTrigger render={<Button variant="outline" size="sm" className="h-8 gap-1.5" />}>
+							<SlidersHorizontal className="size-3.5" />
+							{labels.filter}
+							{activeFilters.length > 0 && (
+								<Badge variant="secondary" className="ml-1 rounded-full px-1">
+									{activeFilters.length}
+								</Badge>
+							)}
 						</DropdownMenuTrigger>
 						<DropdownMenuContent align="end" className="min-w-[180px] p-2">
 							{config.filterableColumns.map(column => (
-								<div key={column.id}>
+								<DropdownMenuGroup key={column.id}>
 									<DropdownMenuLabel className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
 										{column.title}
 									</DropdownMenuLabel>
@@ -147,7 +146,7 @@ export function DataTableToolbar<TData>({
 											</DropdownMenuItem>
 										)
 									})}
-								</div>
+								</DropdownMenuGroup>
 							))}
 						</DropdownMenuContent>
 					</DropdownMenu>
@@ -155,11 +154,9 @@ export function DataTableToolbar<TData>({
 
 				{config?.enableColumnVisibility && (
 					<DropdownMenu modal={false}>
-						<DropdownMenuTrigger asChild>
-							<Button variant="outline" size="sm" className="h-8 gap-1.5">
-								<Columns3 className="size-3.5" />
-								{labels.columns}
-							</Button>
+						<DropdownMenuTrigger render={<Button variant="outline" size="sm" className="h-8 gap-1.5" />}>
+							<Columns3 className="size-3.5" />
+							{labels.columns}
 						</DropdownMenuTrigger>
 						<DropdownMenuContent align="end" className="min-w-[180px] p-2">
 							{table
@@ -181,11 +178,9 @@ export function DataTableToolbar<TData>({
 
 				{(config?.enableRowSelection || activeFilters.length > 0) && (
 					<DropdownMenu modal={false}>
-						<DropdownMenuTrigger asChild>
-							<Button variant="outline" size="sm" className="h-8 w-8 p-0">
-								<MoreHorizontal className="size-3.5" />
-								<span className="sr-only">{labels.openMenu}</span>
-							</Button>
+						<DropdownMenuTrigger render={<Button variant="outline" size="sm" className="h-8 w-8 p-0" />}>
+							<MoreHorizontal className="size-3.5" />
+							<span className="sr-only">{labels.openMenu}</span>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent align="end" className="min-w-[180px] p-2">
 							{config?.enableRowSelection && (
@@ -203,9 +198,11 @@ export function DataTableToolbar<TData>({
 							{activeFilters.length > 0 && (
 								<>
 									{config?.enableRowSelection && <DropdownMenuSeparator />}
-									<DropdownMenuLabel className="px-2 py-1.5 text-sm font-medium">
-										{labels.activeFilters}
-									</DropdownMenuLabel>
+									<DropdownMenuGroup>
+										<DropdownMenuLabel className="px-2 py-1.5 text-sm font-medium">
+											{labels.activeFilters}
+										</DropdownMenuLabel>
+									</DropdownMenuGroup>
 									{activeFilters.map(filter => (
 										<DropdownMenuItem
 											key={`${filter.id}-${filter.value}`}

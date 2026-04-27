@@ -4,6 +4,7 @@ import { DialogTrigger } from '@shared/ui/shadcn/dialog'
 import {
 	DropdownMenu,
 	DropdownMenuContent,
+	DropdownMenuGroup,
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
@@ -50,22 +51,26 @@ export function WorkspaceSwitcher({ currentWorkspace }: WorkspaceSwitcherProps) 
 					onOpenChange={setCreateOpen}
 					trigger={
 						<DropdownMenu>
-							<DropdownMenuTrigger asChild>
-								<SidebarMenuButton className="h-8 data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
-									<div
-										aria-hidden
-										className="flex size-6 items-center justify-center rounded-sm bg-sidebar-primary text-[10px] font-semibold text-sidebar-primary-foreground"
-									>
-										{getWorkspaceInitials(currentWorkspace.name)}
-									</div>
-									<span className="truncate text-sm font-semibold">{currentWorkspace.name}</span>
-									<ChevronDown className="ml-auto size-3.5 opacity-50" />
-								</SidebarMenuButton>
+							<DropdownMenuTrigger
+								render={
+									<SidebarMenuButton className="h-8 data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground" />
+								}
+							>
+								<div
+									aria-hidden
+									className="flex size-6 items-center justify-center rounded-sm bg-sidebar-primary text-[10px] font-semibold text-sidebar-primary-foreground"
+								>
+									{getWorkspaceInitials(currentWorkspace.name)}
+								</div>
+								<span className="truncate text-sm font-semibold">{currentWorkspace.name}</span>
+								<ChevronDown className="ml-auto size-3.5 opacity-50" />
 							</DropdownMenuTrigger>
 							<DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width) text-sm" align="start">
-								<DropdownMenuLabel className="text-xs font-normal text-muted-foreground">
-									{t('WORKSPACES')}
-								</DropdownMenuLabel>
+								<DropdownMenuGroup>
+									<DropdownMenuLabel className="text-xs font-normal text-muted-foreground">
+										{t('WORKSPACES')}
+									</DropdownMenuLabel>
+								</DropdownMenuGroup>
 								{workspaceData.map(workspace => {
 									const isActive = currentWorkspace.slug === workspace.slug
 									return (
@@ -86,13 +91,13 @@ export function WorkspaceSwitcher({ currentWorkspace }: WorkspaceSwitcherProps) 
 									)
 								})}
 								<DropdownMenuSeparator />
-								<DialogTrigger asChild>
-									<DropdownMenuItem onSelect={() => setCreateOpen(true)} className="cursor-pointer gap-2">
-										<div className="flex size-6 items-center justify-center rounded-sm border border-sidebar-border text-muted-foreground">
-											<Plus className="size-3" />
-										</div>
-										<span className="flex-1 truncate font-normal">{t('ADD_WORKSPACE')}</span>
-									</DropdownMenuItem>
+								<DialogTrigger
+									render={<DropdownMenuItem onSelect={() => setCreateOpen(true)} className="cursor-pointer gap-2" />}
+								>
+									<div className="flex size-6 items-center justify-center rounded-sm border border-sidebar-border text-muted-foreground">
+										<Plus className="size-3" />
+									</div>
+									<span className="flex-1 truncate font-normal">{t('ADD_WORKSPACE')}</span>
 								</DialogTrigger>
 							</DropdownMenuContent>
 						</DropdownMenu>

@@ -38,21 +38,23 @@ export function UserMenu() {
 		<SidebarMenu>
 			<SidebarMenuItem>
 				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<SidebarMenuButton
-							size="lg"
-							className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-						>
-							<Avatar className="h-8 w-8 rounded-lg">
-								<AvatarImage src={userData.avatar} alt={userData.name} />
-								<AvatarFallback className="rounded-lg">{userInitials}</AvatarFallback>
-							</Avatar>
-							<div className="grid flex-1 text-left text-sm leading-tight">
-								<span className="truncate font-semibold">{userData.name}</span>
-								<span className="truncate text-xs text-muted-foreground">{userData.email}</span>
-							</div>
-							<ChevronsUpDown className="ml-auto size-4" />
-						</SidebarMenuButton>
+					<DropdownMenuTrigger
+						render={
+							<SidebarMenuButton
+								size="lg"
+								className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+							/>
+						}
+					>
+						<Avatar className="h-8 w-8 rounded-lg">
+							<AvatarImage src={userData.avatar} alt={userData.name} />
+							<AvatarFallback className="rounded-lg">{userInitials}</AvatarFallback>
+						</Avatar>
+						<div className="grid flex-1 text-left text-sm leading-tight">
+							<span className="truncate font-semibold">{userData.name}</span>
+							<span className="truncate text-xs text-muted-foreground">{userData.email}</span>
+						</div>
+						<ChevronsUpDown className="ml-auto size-4" />
 					</DropdownMenuTrigger>
 					<DropdownMenuContent
 						className="w-(--radix-dropdown-menu-trigger-width) min-w-56"
@@ -60,29 +62,32 @@ export function UserMenu() {
 						align="end"
 						sideOffset={4}
 					>
-						<DropdownMenuLabel className="p-0 font-normal">
-							<div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-								<Avatar className="h-8 w-8 rounded-lg">
-									<AvatarImage src={userData.avatar} alt={userData.name} />
-									<AvatarFallback className="rounded-lg">{userInitials}</AvatarFallback>
-								</Avatar>
-								<div className="grid flex-1 text-left text-sm leading-tight">
-									<span className="truncate font-semibold">{userData.name}</span>
-									<span className="truncate text-xs text-muted-foreground">{userData.email}</span>
+						<DropdownMenuGroup>
+							<DropdownMenuLabel className="p-0 font-normal">
+								<div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+									<Avatar className="h-8 w-8 rounded-lg">
+										<AvatarImage src={userData.avatar} alt={userData.name} />
+										<AvatarFallback className="rounded-lg">{userInitials}</AvatarFallback>
+									</Avatar>
+									<div className="grid flex-1 text-left text-sm leading-tight">
+										<span className="truncate font-semibold">{userData.name}</span>
+										<span className="truncate text-xs text-muted-foreground">{userData.email}</span>
+									</div>
 								</div>
-							</div>
-						</DropdownMenuLabel>
+							</DropdownMenuLabel>
+						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
 						<DropdownMenuGroup>
 							<DropdownMenuItem className="cursor-pointer">
 								<User className="mr-2 h-4 w-4" />
 								{t('PROFILE')}
 							</DropdownMenuItem>
-							<DropdownMenuItem asChild className="cursor-pointer">
-								<Link href={routes.dashboard.billing(workspaceSlug)}>
-									<CreditCard className="mr-2 h-4 w-4" />
-									{t('BILLING')}
-								</Link>
+							<DropdownMenuItem
+								className="cursor-pointer"
+								render={<Link href={routes.dashboard.billing(workspaceSlug)} />}
+							>
+								<CreditCard className="mr-2 h-4 w-4" />
+								{t('BILLING')}
 							</DropdownMenuItem>
 							<DropdownMenuItem className="cursor-pointer">
 								<Settings className="mr-2 h-4 w-4" />
@@ -90,13 +95,11 @@ export function UserMenu() {
 							</DropdownMenuItem>
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem asChild className="cursor-pointer">
-							<form action={logoutAction}>
-								<button type="submit" className="flex w-full items-center">
-									<LogOut className="mr-2 h-4 w-4" />
-									{t('LOG_OUT')}
-								</button>
-							</form>
+						<DropdownMenuItem className="cursor-pointer" render={<form action={logoutAction} />}>
+							<button type="submit" className="flex w-full items-center">
+								<LogOut className="mr-2 h-4 w-4" />
+								{t('LOG_OUT')}
+							</button>
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

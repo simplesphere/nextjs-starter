@@ -18,14 +18,16 @@ export function StatsCardTooltip({ content }: StatsCardTooltipProps) {
 
 	return (
 		<Tooltip>
-			<TooltipTrigger asChild>
-				<button
-					type="button"
-					aria-label={t('MORE_INFO')}
-					className="rounded-sm text-muted-foreground/60 transition-colors hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
-				>
-					<CircleHelp className="size-3.5" />
-				</button>
+			<TooltipTrigger
+				render={
+					<button
+						type="button"
+						aria-label={t('MORE_INFO')}
+						className="rounded-sm text-muted-foreground/60 transition-colors hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+					/>
+				}
+			>
+				<CircleHelp className="size-3.5" />
 			</TooltipTrigger>
 			<TooltipContent>{content}</TooltipContent>
 		</Tooltip>

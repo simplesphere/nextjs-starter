@@ -243,7 +243,8 @@ export function DataTable<TData>({ data, config }: DataTableProps<TData>) {
 				<span className="sr-only">{config.labels?.selectRow || t('SELECT_ROW')}</span>
 			) : (
 				<Checkbox
-					checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
+					checked={table.getIsAllPageRowsSelected()}
+					indeterminate={table.getIsSomePageRowsSelected()}
 					onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
 					onClick={e => e.stopPropagation()}
 					aria-label={config.labels?.selectAll || t('SELECT_ALL')}

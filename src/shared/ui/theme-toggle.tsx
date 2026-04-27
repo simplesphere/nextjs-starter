@@ -39,24 +39,24 @@ export function ThemeToggle() {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<Button variant="ghost" size="icon" className="relative h-9 w-9" aria-label={t('ARIA_LABEL')}>
-					<Sun
-						className="h-4 w-4 transition-all"
-						style={{
-							opacity: mounted && !isDark ? 1 : 0,
-							transform: isDark ? 'rotate(-90deg) scale(0)' : 'rotate(0) scale(1)'
-						}}
-					/>
-					<Moon
-						className="absolute h-4 w-4 transition-all"
-						style={{
-							opacity: mounted && isDark ? 1 : 0,
-							transform: isDark ? 'rotate(0) scale(1)' : 'rotate(90deg) scale(0)'
-						}}
-					/>
-					<span className="sr-only">{t('ARIA_LABEL')}</span>
-				</Button>
+			<DropdownMenuTrigger
+				render={<Button variant="ghost" size="icon" className="relative h-9 w-9" aria-label={t('ARIA_LABEL')} />}
+			>
+				<Sun
+					className="h-4 w-4 transition-all"
+					style={{
+						opacity: mounted && !isDark ? 1 : 0,
+						transform: isDark ? 'rotate(-90deg) scale(0)' : 'rotate(0) scale(1)'
+					}}
+				/>
+				<Moon
+					className="absolute h-4 w-4 transition-all"
+					style={{
+						opacity: mounted && isDark ? 1 : 0,
+						transform: isDark ? 'rotate(0) scale(1)' : 'rotate(90deg) scale(0)'
+					}}
+				/>
+				<span className="sr-only">{t('ARIA_LABEL')}</span>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
 				<DropdownMenuItem onClick={() => setTheme('light')} aria-checked={theme === 'light'} role="menuitemradio">
