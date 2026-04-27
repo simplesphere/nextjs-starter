@@ -4,7 +4,7 @@ import type { CardBlockProps } from '@/shared/ui/card-block/model/types'
 
 export function CardBlock({ title, subtitle, rightContent, children, className }: CardBlockProps) {
 	return (
-		<Card className={cn('w-full rounded-lg', className)}>
+		<Card className={cn('w-full gap-0 rounded-lg py-0', className)}>
 			<CardHeader className="flex flex-row items-center justify-between space-y-0 px-5 py-4">
 				<div className="space-y-1">
 					<h3 className="text-lg font-semibold">{title}</h3>
