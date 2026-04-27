@@ -5,7 +5,7 @@ export const contentType = 'image/png'
 
 /**
  * Apple touch icon for iOS add-to-homescreen. Replace by dropping a static
- * `apple-icon.png` in `src/app/` — Next.js prefers the static file.
+ * `apple-icon.png` in `src/app/` - Next.js prefers the static file.
  */
 export default function AppleIcon() {
 	return new ImageResponse(

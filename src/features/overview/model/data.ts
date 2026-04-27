@@ -3,7 +3,7 @@ import { DollarSign, TrendingUp, Users, UsersRound } from 'lucide-react'
 import type { OverviewStatItem } from '@/features/overview/model/types'
 
 /**
- * MOCK DATA — replace with real metric queries once analytics are wired up.
+ * MOCK DATA - replace with real metric queries once analytics are wired up.
  * Returning a typed array keeps the consumer signature stable so downstream
  * components don't need to change when the data source swaps.
  *

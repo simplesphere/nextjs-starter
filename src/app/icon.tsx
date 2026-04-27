@@ -5,7 +5,7 @@ export const contentType = 'image/png'
 
 /**
  * Default favicon generated at build time. Replace with a real asset by
- * dropping a static `icon.png` (or .ico/.svg) in `src/app/` — Next.js will
+ * dropping a static `icon.png` (or .ico/.svg) in `src/app/` - Next.js will
  * prefer the static file over this generator.
  */
 export default function Icon() {

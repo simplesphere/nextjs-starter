@@ -102,7 +102,7 @@ The dashboard routes are workspace-scoped:
 - `/[workspace]/analytics` → workspace analytics (e.g. `/acme-corp/analytics`)
 
 The workspace switcher in the sidebar navigates between workspaces via URL. Workspace data is resolved server-side from
-route params — no client-side context needed.
+route params - no client-side context needed.
 
 ## Authentication (Dummy)
 
@@ -217,7 +217,7 @@ return <h1>{t('TITLE')}</h1>
 
 ## Features
 
-- **Authentication**: Login, forgot password, OTP verification, reset password (dummy — no backend)
+- **Authentication**: Login, forgot password, OTP verification, reset password (dummy - no backend)
 - **Dashboard**: Workspace-scoped dashboard with sidebar navigation and workspace switcher
 - **Internationalization**: Multi-language support with next-intl
 - **Dark Mode**: System-aware theme switching

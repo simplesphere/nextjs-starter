@@ -37,7 +37,7 @@ export function ForgotPasswordForm() {
 
 	/**
 	 * Handles form submission with validated email data.
-	 * Server action redirects on success — only failures land here.
+	 * Server action redirects on success - only failures land here.
 	 *
 	 * @param data - Validated forgot password form data
 	 */

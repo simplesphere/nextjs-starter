@@ -52,7 +52,7 @@ function buildCspHeader(nonce: string): string {
  *    own bootstrap scripts.
  *
  * If you add inline `<Script>` tags, read the nonce from `headers()` and pass
- * it explicitly — `'strict-dynamic'` will block anything else in production.
+ * it explicitly - `'strict-dynamic'` will block anything else in production.
  */
 export default function proxy(request: NextRequest) {
 	// 16 random bytes → 128 bits of entropy, base64 for CSP-safe transport.
@@ -60,7 +60,7 @@ export default function proxy(request: NextRequest) {
 	crypto.getRandomValues(buffer)
 	const nonce = Buffer.from(buffer).toString('base64')
 
-	// NextRequest exposes a mutable Headers facade — set nonce here so it
+	// NextRequest exposes a mutable Headers facade - set nonce here so it
 	// reaches server components downstream.
 	request.headers.set('x-nonce', nonce)
 

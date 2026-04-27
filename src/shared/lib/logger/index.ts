@@ -3,7 +3,7 @@
  * silent-by-default emitter in production until you swap in Sentry, Datadog,
  * or similar.
  *
- * Replace `productionEmitter` with your real reporter — keep the shape so
+ * Replace `productionEmitter` with your real reporter - keep the shape so
  * call sites don't change.
  *
  * @example

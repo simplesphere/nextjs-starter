@@ -39,7 +39,7 @@ export async function resetPasswordAction(data: ResetPasswordFormData): Promise<
 
 		const token = await readResetToken()
 		if (!token) {
-			// No verified OTP in this session — block the reset entirely.
+			// No verified OTP in this session - block the reset entirely.
 			return { success: false, error: 'INVALID_TOKEN' }
 		}
 

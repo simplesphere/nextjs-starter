@@ -5,7 +5,7 @@ import type { NavigationCategory, NavigationData, NavigationItem } from '@/widge
  * Generates navigation data structure with categories and standalone pages.
  *
  * NOTE: Auth links are intentionally absent from public marketing navigation
- * — entry into the auth flow is via the dedicated "Sign in" CTA in the app
+ * - entry into the auth flow is via the dedicated "Sign in" CTA in the app
  * shell, not via a public dropdown. Add additional categories here as your
  * product grows.
  *

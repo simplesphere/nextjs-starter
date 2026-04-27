@@ -14,7 +14,7 @@ let callsSinceCleanup = 0
 /**
  * Removes expired entries from the rate limit map to prevent memory leaks.
  * Falls back to evicting the oldest entry when the cap is reached without
- * any expirations to reclaim — keeps the map bounded under sustained load.
+ * any expirations to reclaim - keeps the map bounded under sustained load.
  */
 function cleanup(now: number) {
 	for (const [key, entry] of rateLimitMap) {
@@ -24,7 +24,7 @@ function cleanup(now: number) {
 	}
 
 	if (rateLimitMap.size > MAX_ENTRIES) {
-		// Evict the oldest insertion(s) — Map preserves insertion order, so the
+		// Evict the oldest insertion(s) - Map preserves insertion order, so the
 		// first entry is always the oldest seen. Drop until we're back under cap.
 		const overflow = rateLimitMap.size - MAX_ENTRIES
 		const iterator = rateLimitMap.keys()

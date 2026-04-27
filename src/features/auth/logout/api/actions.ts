@@ -8,7 +8,7 @@ import { logger } from '@/shared/lib/logger'
 /**
  * Server action that signs the current user out and redirects to the login page.
  *
- * Today this is scaffolding — it clears the short-lived reset-token cookie
+ * Today this is scaffolding - it clears the short-lived reset-token cookie
  * (the only auth-shaped cookie the template ships) and redirects. When you
  * wire a real auth provider, replace the body with the provider's signOut +
  * cookie/session cleanup, then keep the redirect.

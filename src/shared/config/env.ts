@@ -7,7 +7,7 @@ import { z } from 'zod'
  * bundle MUST be prefixed with `NEXT_PUBLIC_` and live in `clientSchema`.
  *
  * On import, this module validates `process.env` against the schemas and
- * throws at startup if a required variable is missing or malformed —
+ * throws at startup if a required variable is missing or malformed -
  * preferring fail-fast over silent localhost fallbacks.
  *
  * @example

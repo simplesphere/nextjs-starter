@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server'
  * uptime monitors and orchestrators (k8s, ECS, fly.io, etc.) can verify the
  * process is alive and reachable.
  *
- * Keep this endpoint cheap — no DB queries, no external calls. Add a
+ * Keep this endpoint cheap - no DB queries, no external calls. Add a
  * separate `/api/readiness` route if you need dependency checks.
  *
  * @returns 200 OK with `{ ok, version, time }`

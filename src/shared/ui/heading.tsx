@@ -53,7 +53,7 @@ const defaultWeightFor: Record<HeadingLevel, HeadingWeight> = {
 /**
  * Polymorphic heading component. Decouples semantic level (`as`) from
  * visual size, weight, tracking, and leading so layout decisions don't
- * dictate document outline. Color is inherited from the parent — wrap in a
+ * dictate document outline. Color is inherited from the parent - wrap in a
  * colored container to override.
  *
  * @param props - Heading configuration

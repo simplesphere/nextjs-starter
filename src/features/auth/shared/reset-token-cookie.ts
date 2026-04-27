@@ -12,7 +12,7 @@ const TTL_SECONDS = 60 * 10
  * read by client JS, can't be sent in third-party contexts, and is automatically
  * discarded after {@link TTL_SECONDS}. In production it is also `Secure`.
  *
- * This is scaffolding for the eventual real auth integration — the token value
+ * This is scaffolding for the eventual real auth integration - the token value
  * itself is not yet cryptographically meaningful.
  */
 export async function setResetToken(token: string): Promise<void> {

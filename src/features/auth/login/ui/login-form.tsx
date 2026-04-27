@@ -38,7 +38,7 @@ export function LoginForm() {
 
 	/**
 	 * Handles form submission with validated login data.
-	 * Server action redirects on success — only failures land here.
+	 * Server action redirects on success - only failures land here.
 	 *
 	 * @param data - Validated login form data
 	 */

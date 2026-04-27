@@ -37,7 +37,7 @@ export function ResetPasswordForm() {
 
 	/**
 	 * Handles form submission with validated reset password data.
-	 * Server action redirects on success — only failures land here.
+	 * Server action redirects on success - only failures land here.
 	 *
 	 * @param data - Validated reset password form data
 	 */

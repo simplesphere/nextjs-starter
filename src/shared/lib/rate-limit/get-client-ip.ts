@@ -2,8 +2,8 @@
  * Extracts the client IP address from request headers.
  *
  * Checks headers in order of trust:
- * 1. x-real-ip — typically set by a trusted reverse proxy (Nginx, Caddy, etc.)
- * 2. x-forwarded-for — first IP in the chain (original client, if proxies are trusted)
+ * 1. x-real-ip - typically set by a trusted reverse proxy (Nginx, Caddy, etc.)
+ * 2. x-forwarded-for - first IP in the chain (original client, if proxies are trusted)
  * 3. Returns `null` when neither is present so callers can fail closed.
  *
  * NOTE: Both headers are spoofable unless your reverse proxy strips/overwrites them.

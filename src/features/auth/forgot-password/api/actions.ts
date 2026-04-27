@@ -47,7 +47,7 @@ export async function forgotPasswordAction(data: ForgotPasswordFormData): Promis
 		return { success: false, error: 'GENERAL' }
 	}
 
-	// `redirect()` throws — must run outside the try/catch so the NEXT_REDIRECT
+	// `redirect()` throws - must run outside the try/catch so the NEXT_REDIRECT
 	// signal is not swallowed.
 	redirect(routes.auth.verifyOtp)
 }

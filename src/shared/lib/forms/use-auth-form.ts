@@ -8,7 +8,7 @@ import { useEffect } from 'react'
  *
  * Without this, a server-side error banner ("Invalid credentials") would stay
  * visible forever even after the user starts editing. Plug-and-play for any
- * react-hook-form instance — pass the form and the field names you want to
+ * react-hook-form instance - pass the form and the field names you want to
  * watch for changes.
  *
  * @param form - The `useForm` instance to wire up

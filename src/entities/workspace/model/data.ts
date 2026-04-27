@@ -1,7 +1,7 @@
 import type { Workspace } from '@/entities/workspace/model/types'
 
 /**
- * MOCK DATA — replace with the real workspace lookup once persistence is
+ * MOCK DATA - replace with the real workspace lookup once persistence is
  * wired up (e.g. fetch from your DB based on the authenticated user). The
  * `[workspace]` route layout currently calls `generateStaticParams` over
  * this list; remove that call when these become dynamic.

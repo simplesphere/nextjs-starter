@@ -1,7 +1,7 @@
 import type { User } from '@/entities/user/model/types'
 
 /**
- * MOCK DATA — replace with the real authenticated-user lookup once auth
+ * MOCK DATA - replace with the real authenticated-user lookup once auth
  * is wired up (e.g. fetch from your DB based on the session). Importing this
  * into a client component is safe today only because the value is static.
  *

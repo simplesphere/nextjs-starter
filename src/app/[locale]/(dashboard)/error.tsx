@@ -10,7 +10,7 @@ import { ErrorDisplay } from '@/shared/ui/error-display'
  * Error boundary scoped to the authenticated dashboard segment.
  *
  * Renders inside the SidebarProvider so the sidebar/header chrome stays
- * intact when a single dashboard page throws — the user can still navigate
+ * intact when a single dashboard page throws - the user can still navigate
  * to a different workspace section instead of bouncing to a full-screen error.
  *
  * @param props - The error boundary props

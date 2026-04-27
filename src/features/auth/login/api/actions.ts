@@ -50,7 +50,7 @@ export async function loginAction(data: LoginFormData): Promise<LoginResult> {
 		return { success: false, error: 'GENERAL' }
 	}
 
-	// `redirect()` throws — must be called outside the try/catch above so the
+	// `redirect()` throws - must be called outside the try/catch above so the
 	// special NEXT_REDIRECT control-flow signal is not swallowed.
 	redirect(routes.dashboard.root)
 }
